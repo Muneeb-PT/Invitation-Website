@@ -1,307 +1,2057 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Housewarming Ceremony | Akbar Ali & Nabla</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --gold-light: #fde047;
-            --gold-main: #fbbf24;
-            --gold-dark: #b45309;
-            --bg-color: #022c22;
-            --bg-gradient: linear-gradient(135deg, #022c22 0%, #064e3b 50%, #0f172a 100%);
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.15);
-        }
+<meta charset="UTF-8">
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0,
+      maximum-scale=1.0, viewport-fit=cover">
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--bg-gradient);
-            background-attachment: fixed;
-            color: #f8fafc;
-            overflow-x: hidden;
-            perspective: 1000px; /* Essential for 3D effects */
-        }
+<meta name="theme-color" content="#071711">
 
-        /* Animated Background Particles */
-        .background-animation {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: -1;
-            overflow: hidden;
-        }
-        .circle {
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--gold-main) 0%, transparent 70%);
-            opacity: 0.15;
-            animation: float 20s infinite ease-in-out alternate;
-        }
-        .circle:nth-child(1) { width: 300px; height: 300px; top: -10%; left: -10%; animation-duration: 25s; }
-        .circle:nth-child(2) { width: 400px; height: 400px; bottom: -10%; right: -10%; animation-duration: 22s; }
-        .circle:nth-child(3) { width: 200px; height: 200px; top: 40%; left: 60%; animation-duration: 18s; }
+<title>Housewarming Ceremony | Akbar Ali & Nabla</title>
 
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(30px, -50px) scale(1.1); }
-            100% { transform: translate(-20px, 20px) scale(0.9); }
-        }
+<meta name="description"
+      content="You are warmly invited to the housewarming ceremony of Akbar Ali & Nabla at Chakkipparamban House.">
 
-        /* Main Container - Mobile Optimized */
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
+<!-- Social / WhatsApp / Facebook / LinkedIn Preview -->
+<meta property="og:type" content="website">
+<meta property="og:title"
+      content="Housewarming Ceremony | Akbar Ali & Nabla">
+<meta property="og:description"
+      content="06 September 2026 • 4 PM to 8 PM • Chakkipparamban House">
+<meta property="og:url"
+      content="https://muneeb-pt.github.io/Invitation-Website/">
+<meta property="og:image"
+      content="https://muneeb-pt.github.io/Invitation-Website/og-preview.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 
-        /* Glassmorphism Cards */
-        .card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 35px 25px;
-            text-align: center;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            transform-style: preserve-3d;
-        }
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title"
+      content="Housewarming Ceremony | Akbar Ali & Nabla">
+<meta name="twitter:description"
+      content="06 September 2026 • 4 PM to 8 PM • Chakkipparamban House">
+<meta name="twitter:image"
+      content="https://muneeb-pt.github.io/Invitation-Website/og-preview.png">
 
-        /* Typography */
-        h1, h2, h3, h4, .serif {
-            font-family: 'Playfair Display', serif;
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-        .gold-text {
-            background: linear-gradient(to right, var(--gold-light), var(--gold-main), var(--gold-dark));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            display: inline-block;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet">
 
-        .subtitle {
-            font-size: 0.75rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: #94a3b8;
-            margin-bottom: 10px;
-        }
+<style>
 
-        .title-main {
-            font-size: 2.2rem;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
+/* =========================================================
+   ROOT
+========================================================= */
 
-        .cursive {
-            font-style: italic;
-            font-weight: 400;
-            font-size: 2.5rem;
-        }
+:root {
+    --night: #071711;
+    --green: #0d2a20;
+    --green2: #12382a;
 
-        .house-name {
-            font-size: 1.8rem;
-            color: var(--gold-main);
-            margin: 10px 0 25px 0;
-        }
+    --cream: #f7f1e4;
+    --cream2: #fffaf0;
 
-        .names {
-            font-size: 2.2rem;
-            font-weight: 600;
-            margin-top: 5px;
-        }
+    --gold: #c8a45c;
+    --gold-light: #f0d99b;
 
-        /* Grid for Date & Time */
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            position: relative;
-        }
-        
-        .info-grid::after {
-            content: '';
-            position: absolute;
-            top: 10%; bottom: 10%; left: 50%;
-            width: 1px;
-            background: var(--glass-border);
-        }
+    --text-dark: #13251e;
+    --muted: #777267;
 
-        .info-item p {
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: #f8fafc;
-            margin-top: 5px;
-        }
+    --line: rgba(200,164,92,.30);
 
-        /* Jumping Button */
-        .map-btn {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 15px 35px;
-            background: linear-gradient(135deg, var(--gold-main), var(--gold-dark));
-            color: #fff;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1rem;
-            letter-spacing: 1px;
-            box-shadow: 0 10px 20px rgba(251, 191, 36, 0.3);
-            animation: jump 2s infinite cubic-bezier(0.28, 0.84, 0.42, 1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
+    --serif: "Cormorant Garamond", Georgia, serif;
+    --sans: "DM Sans", Arial, sans-serif;
+}
 
-        .map-btn:active {
-            transform: scale(0.95);
-        }
 
-        @keyframes jump {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-15px); }
-            60% { transform: translateY(-7px); }
-        }
+/* =========================================================
+   RESET
+========================================================= */
 
-        .footer-text {
-            font-size: 0.9rem;
-            line-height: 1.6;
-            color: #cbd5e1;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        .footer-text strong {
-            display: block;
-            margin-top: 15px;
-            color: var(--gold-main);
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-        }
+html {
+    scroll-behavior: smooth;
+    background: var(--night);
+}
 
-        /* 3D Scroll Animations Classes */
-        .reveal {
-            opacity: 0;
-            transform: translateY(80px) rotateX(-25deg) scale(0.9);
-            transition: all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+body {
+    min-width: 320px;
+    overflow-x: hidden;
 
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0) rotateX(0) scale(1);
-        }
+    font-family: var(--sans);
+    background: var(--cream);
+    color: var(--text-dark);
+}
 
-    </style>
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+/* =========================================================
+   LOADER
+========================================================= */
+
+#loader {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+
+    display: grid;
+    place-items: center;
+
+    background:
+        radial-gradient(circle at center,
+            #174432 0%,
+            #0b2119 42%,
+            #050e0a 100%);
+
+    transition:
+        opacity 1s cubic-bezier(.77,0,.18,1),
+        visibility 1s;
+}
+
+#loader.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loader-content {
+    text-align: center;
+    color: var(--gold-light);
+}
+
+.loader-symbol {
+    width: 74px;
+    height: 74px;
+
+    display: grid;
+    place-items: center;
+
+    margin: 0 auto 22px;
+
+    border: 1px solid rgba(240,217,155,.35);
+    border-radius: 50%;
+
+    animation:
+        loaderSpin 2s linear infinite,
+        loaderPulse 2s ease-in-out infinite;
+}
+
+.loader-symbol::before {
+    content: "✦";
+    font-size: 22px;
+}
+
+.loader-text {
+    font-size: 8px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+}
+
+@keyframes loaderSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes loaderPulse {
+    50% {
+        box-shadow: 0 0 50px rgba(200,164,92,.25);
+    }
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 0%;
+    height: 2px;
+
+    z-index: 99998;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--gold),
+            var(--gold-light)
+        );
+
+    box-shadow:
+        0 0 15px rgba(240,217,155,.7);
+}
+
+
+/* =========================================================
+   PARTICLES
+========================================================= */
+
+#particles {
+    position: fixed;
+    inset: 0;
+
+    z-index: 1;
+
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+
+    width: 2px;
+    height: 2px;
+
+    border-radius: 50%;
+
+    background: var(--gold-light);
+
+    opacity: 0;
+
+    animation:
+        particleFloat linear infinite;
+}
+
+@keyframes particleFloat {
+
+    0% {
+        transform:
+            translate3d(0,110vh,0)
+            scale(.3);
+
+        opacity: 0;
+    }
+
+    15% {
+        opacity: .5;
+    }
+
+    80% {
+        opacity: .3;
+    }
+
+    100% {
+        transform:
+            translate3d(40px,-10vh,0)
+            scale(1.4);
+
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    position: relative;
+
+    min-height: 100svh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding:
+        max(28px, env(safe-area-inset-top))
+        18px
+        max(70px, env(safe-area-inset-bottom));
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(200,164,92,.17),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 90% 85%,
+            rgba(20,70,50,.24),
+            transparent 35%
+        ),
+        var(--cream);
+}
+
+
+/* rotating rings */
+
+.hero::before,
+.hero::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    border-radius: 50%;
+
+    border: 1px solid var(--line);
+
+    pointer-events: none;
+}
+
+.hero::before {
+    width: min(105vw, 650px);
+    height: min(105vw, 650px);
+
+    transform: translate(-50%,-50%);
+
+    animation:
+        ringRotate 22s linear infinite;
+}
+
+.hero::after {
+    width: min(135vw, 850px);
+    height: min(135vw, 850px);
+
+    transform: translate(-50%,-50%);
+
+    opacity: .35;
+
+    animation:
+        ringRotateReverse 32s linear infinite;
+}
+
+@keyframes ringRotate {
+    to {
+        transform:
+            translate(-50%,-50%)
+            rotate(360deg);
+    }
+}
+
+@keyframes ringRotateReverse {
+    to {
+        transform:
+            translate(-50%,-50%)
+            rotate(-360deg);
+    }
+}
+
+
+/* =========================================================
+   HERO CARD
+========================================================= */
+
+.hero-card {
+    position: relative;
+    z-index: 5;
+
+    width: min(100%, 430px);
+
+    padding:
+        48px
+        25px
+        45px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.93),
+            rgba(249,244,232,.90)
+        );
+
+    border:
+        1px solid rgba(200,164,92,.5);
+
+    box-shadow:
+        0 40px 100px rgba(10,30,22,.20),
+        inset 0 0 0 1px rgba(255,255,255,.5);
+
+    transform-style: preserve-3d;
+
+    will-change: transform;
+
+    transition:
+        transform .18s cubic-bezier(.2,.8,.2,1);
+}
+
+.hero-card::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 9px;
+
+    border:
+        1px solid rgba(200,164,92,.35);
+
+    pointer-events: none;
+}
+
+.hero-card::after {
+    content: "✦";
+
+    position: absolute;
+
+    top: 15px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    color: var(--gold);
+}
+
+
+/* =========================================================
+   HERO TYPOGRAPHY
+========================================================= */
+
+.kicker {
+    font-size: 8px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+
+    color: var(--gold);
+
+    margin-bottom: 15px;
+}
+
+.invite {
+    font-family: var(--serif);
+
+    font-size: 18px;
+
+    font-style: italic;
+
+    color: var(--muted);
+
+    margin-bottom: 5px;
+}
+
+.hero-title {
+    font-family: var(--serif);
+
+    font-size:
+        clamp(47px, 14vw, 72px);
+
+    line-height: .80;
+
+    font-weight: 600;
+
+    letter-spacing: -2px;
+
+    text-transform: uppercase;
+
+    color: var(--green);
+}
+
+.hero-title span {
+    display: block;
+
+    margin-top: 12px;
+
+    font-size: .58em;
+
+    letter-spacing: 6px;
+
+    font-weight: 500;
+}
+
+.gold-line {
+    width: 120px;
+    height: 1px;
+
+    margin: 27px auto;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--gold),
+            transparent
+        );
+}
+
+.new-home {
+    font-size: 8px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+
+    color: var(--muted);
+
+    margin-bottom: 7px;
+}
+
+.house {
+    font-family: var(--serif);
+
+    font-size: 30px;
+
+    line-height: 1;
+
+    font-weight: 600;
+
+    margin-bottom: 30px;
+}
+
+.with-love {
+    font-size: 8px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+
+    color: var(--muted);
+}
+
+.names {
+    margin-top: 6px;
+
+    font-family: var(--serif);
+
+    font-size: 27px;
+
+    font-weight: 500;
+}
+
+.names em {
+    color: var(--gold);
+
+    font-size: 18px;
+
+    margin: 0 5px;
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+.hero-date {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 23px;
+
+    margin-top: 30px;
+}
+
+.date-item small,
+.time-item small {
+    display: block;
+
+    font-size: 7px;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+
+    color: var(--muted);
+}
+
+.date-item strong {
+    display: block;
+
+    font-family: var(--serif);
+
+    font-size: 28px;
+}
+
+.time-item strong {
+    display: block;
+
+    font-family: var(--serif);
+
+    font-size: 23px;
+}
+
+.date-divider {
+    width: 1px;
+    height: 42px;
+
+    background: var(--line);
+}
+
+
+/* =========================================================
+   SCROLL HINT
+========================================================= */
+
+.scroll-hint {
+    position: absolute;
+
+    bottom: 17px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 10;
+
+    text-align: center;
+
+    color: var(--muted);
+
+    font-size: 7px;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+
+    animation: scrollHint 2s ease-in-out infinite;
+}
+
+.scroll-hint::after {
+    content: "↓";
+
+    display: block;
+
+    font-size: 17px;
+
+    margin-top: 4px;
+
+    color: var(--gold);
+}
+
+@keyframes scrollHint {
+    50% {
+        transform:
+            translateX(-50%)
+            translateY(7px);
+        opacity: .45;
+    }
+}
+
+
+/* =========================================================
+   GENERIC SECTION
+========================================================= */
+
+.section {
+    position: relative;
+
+    padding:
+        110px
+        22px;
+
+    overflow: hidden;
+}
+
+.section-inner {
+    position: relative;
+
+    max-width: 950px;
+
+    margin: auto;
+
+    z-index: 4;
+}
+
+.section-label {
+    text-align: center;
+
+    font-size: 8px;
+
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+
+    color: var(--gold);
+
+    margin-bottom: 15px;
+}
+
+.section-title {
+    font-family: var(--serif);
+
+    font-size:
+        clamp(42px, 12vw, 70px);
+
+    line-height: .9;
+
+    font-weight: 500;
+
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+.section-copy {
+    max-width: 590px;
+
+    margin: auto;
+
+    text-align: center;
+
+    color: var(--muted);
+
+    font-size: 14px;
+
+    line-height: 1.9;
+}
+
+
+/* =========================================================
+   BLESSINGS
+========================================================= */
+
+.blessings {
+    min-height: 90svh;
+
+    display: grid;
+    place-items: center;
+
+    background:
+        radial-gradient(
+            circle at 50% 30%,
+            #245b44,
+            transparent 40%
+        ),
+        linear-gradient(
+            145deg,
+            #071711,
+            #103226
+        );
+
+    color: white;
+}
+
+.blessings::before {
+    content: "✦";
+
+    position: absolute;
+
+    font-size: 320px;
+
+    color: var(--gold);
+
+    opacity: .025;
+
+    animation:
+        blessingRotate 30s linear infinite;
+}
+
+@keyframes blessingRotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.blessings .section-copy {
+    color: rgba(255,255,255,.66);
+}
+
+.blessing-orbit {
+    width: 190px;
+    height: 190px;
+
+    margin:
+        0
+        auto
+        35px;
+
+    border:
+        1px solid rgba(240,217,155,.25);
+
+    border-radius: 50%;
+
+    display: grid;
+    place-items: center;
+
+    position: relative;
+}
+
+.blessing-orbit::before,
+.blessing-orbit::after {
+    content: "";
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(240,217,155,.20);
+}
+
+.blessing-orbit::before {
+    inset: 20px;
+}
+
+.blessing-orbit::after {
+    inset: 40px;
+}
+
+.blessing-symbol {
+    color: var(--gold-light);
+
+    font-size: 35px;
+}
+
+
+/* =========================================================
+   DETAILS
+========================================================= */
+
+.details {
+    background: var(--cream2);
+}
+
+.details-grid {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 16px;
+
+    margin-top: 45px;
+}
+
+.detail-card {
+    position: relative;
+
+    padding: 35px 22px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffdf7,
+            #f5eee1
+        );
+
+    border:
+        1px solid var(--line);
+
+    box-shadow:
+        0 15px 40px rgba(16,37,29,.06);
+
+    transform-style: preserve-3d;
+
+    transition:
+        transform .5s cubic-bezier(.2,.8,.2,1),
+        box-shadow .5s ease;
+}
+
+.detail-card:hover {
+    transform:
+        translateY(-9px)
+        rotateX(2deg);
+
+    box-shadow:
+        0 25px 60px rgba(16,37,29,.12);
+}
+
+.detail-icon {
+    width: 48px;
+    height: 48px;
+
+    margin:
+        0
+        auto
+        16px;
+
+    border:
+        1px solid var(--line);
+
+    border-radius: 50%;
+
+    display: grid;
+    place-items: center;
+
+    color: var(--gold);
+
+    font-size: 20px;
+}
+
+.detail-card small {
+    display: block;
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+
+    color: var(--muted);
+
+    margin-bottom: 9px;
+}
+
+.detail-card strong {
+    font-family: var(--serif);
+
+    font-size: 25px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   MAP BUTTON
+========================================================= */
+
+.map-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 17px;
+
+    padding:
+        13px
+        23px;
+
+    border-radius: 100px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--gold-light),
+            var(--gold)
+        );
+
+    color: #10241c;
+
+    text-decoration: none;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    letter-spacing: .5px;
+
+    box-shadow:
+        0 10px 30px rgba(200,164,92,.25);
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+}
+
+.map-button:hover {
+    transform:
+        translateY(-3px)
+        scale(1.02);
+
+    box-shadow:
+        0 15px 35px rgba(200,164,92,.35);
+}
+
+.map-button:active {
+    transform: scale(.96);
+}
+
+
+/* =========================================================
+   COUNTDOWN
+========================================================= */
+
+.countdown-section {
+    background: var(--green);
+
+    color: white;
+}
+
+.countdown-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap: 7px;
+
+    max-width: 650px;
+
+    margin:
+        45px
+        auto
+        0;
+}
+
+.count {
+    padding:
+        20px
+        5px;
+
+    border:
+        1px solid rgba(240,217,155,.16);
+
+    background:
+        rgba(255,255,255,.035);
+
+    backdrop-filter: blur(12px);
+}
+
+.count strong {
+    display: block;
+
+    font-family: var(--serif);
+
+    font-size:
+        clamp(27px,8vw,42px);
+
+    font-weight: 500;
+
+    color: var(--gold-light);
+}
+
+.count span {
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 6px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    color: rgba(255,255,255,.48);
+}
+
+
+/* =========================================================
+   FINAL MESSAGE
+========================================================= */
+
+.final {
+    min-height: 85svh;
+
+    display: grid;
+
+    place-items: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(200,164,92,.10),
+            transparent 45%
+        ),
+        var(--cream);
+}
+
+.quote-mark {
+    font-family: var(--serif);
+
+    font-size: 80px;
+
+    line-height: .4;
+
+    color: var(--gold);
+
+    text-align: center;
+}
+
+.final-quote {
+    max-width: 720px;
+
+    margin: 25px auto;
+
+    text-align: center;
+
+    font-family: var(--serif);
+
+    font-style: italic;
+
+    font-size:
+        clamp(36px,10vw,62px);
+
+    line-height: 1.05;
+}
+
+.signature {
+    text-align: center;
+
+    font-family: var(--serif);
+
+    font-size: 25px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    padding:
+        65px
+        20px
+        calc(65px + env(safe-area-inset-bottom));
+
+    text-align: center;
+
+    background: #06120d;
+
+    color: white;
+}
+
+.footer-star {
+    color: var(--gold);
+
+    font-size: 22px;
+
+    margin-bottom: 18px;
+}
+
+footer p {
+    font-family: var(--serif);
+
+    font-size: 25px;
+}
+
+footer small {
+    display: block;
+
+    margin-top: 15px;
+
+    font-size: 7px;
+
+    letter-spacing: 3px;
+
+    opacity: .4;
+}
+
+
+/* =========================================================
+   ADVANCED SCROLL REVEALS
+========================================================= */
+
+/*
+   Every reveal has a different starting state.
+   JS chooses the direction.
+*/
+
+.reveal {
+    opacity: 0;
+
+    will-change:
+        transform,
+        opacity,
+        filter;
+
+    transition:
+        opacity 1s cubic-bezier(.2,.8,.2,1),
+        transform 1.15s cubic-bezier(.16,1,.3,1),
+        filter 1.15s ease;
+}
+
+
+/* LEFT */
+
+.from-left {
+    transform:
+        translate3d(-120px,0,0)
+        rotateY(-28deg)
+        scale(.82)
+        filter: blur(8px);
+}
+
+
+/* RIGHT */
+
+.from-right {
+    transform:
+        translate3d(120px,0,0)
+        rotateY(28deg)
+        scale(.82)
+        filter: blur(8px);
+}
+
+
+/* BACK */
+
+.from-back {
+    transform:
+        translate3d(0,0,-180px)
+        rotateX(22deg)
+        scale(.55)
+        filter: blur(10px);
+}
+
+
+/* FRONT */
+
+.from-front {
+    transform:
+        translate3d(0,80px,100px)
+        rotateX(-25deg)
+        scale(.75)
+        filter: blur(7px);
+}
+
+
+/* ROTATE */
+
+.from-rotate {
+    transform:
+        translate3d(0,90px,0)
+        rotateZ(-12deg)
+        rotateY(25deg)
+        scale(.75)
+        filter: blur(8px);
+}
+
+
+/* DIAGONAL */
+
+.from-diagonal {
+    transform:
+        translate3d(100px,100px,0)
+        rotateZ(8deg)
+        rotateX(20deg)
+        scale(.75)
+        filter: blur(8px);
+}
+
+
+/* ACTIVE */
+
+.reveal.active {
+    opacity: 1;
+
+    transform:
+        translate3d(0,0,0)
+        rotateX(0)
+        rotateY(0)
+        rotateZ(0)
+        scale(1);
+
+    filter: blur(0);
+}
+
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+@media (min-width: 720px) {
+
+    .hero {
+        padding: 70px;
+    }
+
+    .hero-card {
+        width: 470px;
+        padding: 65px 55px;
+    }
+
+    .details-grid {
+        grid-template-columns:
+            repeat(3,1fr);
+    }
+
+    .section {
+        padding:
+            140px
+            40px;
+    }
+}
+
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 360px) {
+
+    .hero-card {
+        padding:
+            40px
+            18px;
+    }
+
+    .hero-title {
+        font-size: 43px;
+    }
+
+    .house {
+        font-size: 26px;
+    }
+
+    .names {
+        font-size: 24px;
+    }
+
+    .section {
+        padding:
+            90px
+            17px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+
+        transition-duration: .01ms !important;
+
+        scroll-behavior: auto !important;
+    }
+}
+
+</style>
 </head>
+
+
 <body>
 
-    <div class="background-animation">
-        <div class="circle"></div>
-        <div class="circle"></div>
-        <div class="circle"></div>
+<!-- ======================================================
+     LOADER
+====================================================== -->
+
+<div id="loader">
+
+    <div class="loader-content">
+
+        <div class="loader-symbol"></div>
+
+        <div class="loader-text">
+            Opening Invitation
+        </div>
+
     </div>
 
-    <div class="container">
-        <div class="card reveal active" style="transition-delay: 0.1s;">
-            <p class="subtitle">You are warmly invited to our</p>
-            <h1 class="title-main gold-text">HOUSEWARMING<br><span class="cursive">Ceremony</span></h1>
-            
-            <p class="subtitle" style="margin-top: 20px;">At our new home</p>
-            <h2 class="house-name">Chakkipparamban House</h2>
-            
-            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--glass-border);">
-                <p class="subtitle">With Love</p>
-                <h3 class="names gold-text">Akbar Ali & Nabla</h3>
+</div>
+
+
+<!-- ======================================================
+     SCROLL PROGRESS
+====================================================== -->
+
+<div class="progress" id="progress"></div>
+
+
+<!-- ======================================================
+     PARTICLES
+====================================================== -->
+
+<div id="particles"></div>
+
+
+<!-- ======================================================
+     HERO
+====================================================== -->
+
+<section class="hero">
+
+    <div class="hero-card" id="heroCard">
+
+        <div class="kicker">
+            A New Beginning
+        </div>
+
+        <div class="invite">
+            You are warmly invited to our
+        </div>
+
+        <h1 class="hero-title">
+            Housewarming
+            <span>Ceremony</span>
+        </h1>
+
+        <div class="gold-line"></div>
+
+        <div class="new-home">
+            At Our New Home
+        </div>
+
+        <div class="house">
+            Chakkipparamban House
+        </div>
+
+        <div class="with-love">
+            With Love
+        </div>
+
+        <div class="names">
+            Akbar Ali
+            <em>&</em>
+            Nabla
+        </div>
+
+        <div class="hero-date">
+
+            <div class="date-item">
+
+                <small>Date</small>
+
+                <strong>06</strong>
+
+                <small>
+                    September 2026
+                </small>
+
             </div>
-        </div>
 
-        <div class="card reveal" style="transition-delay: 0.1s;">
-            <div class="info-grid">
-                <div class="info-item">
-                    <p class="subtitle">Date</p>
-                    <p class="serif">6 SEPTEMBER<br>2026</p>
-                </div>
-                <div class="info-item">
-                    <p class="subtitle">Time</p>
-                    <p class="serif">4 PM<br>TO 8 PM</p>
-                </div>
+            <div class="date-divider"></div>
+
+            <div class="time-item">
+
+                <small>Time</small>
+
+                <strong>4 PM</strong>
+
+                <small>
+                    To 8 PM
+                </small>
+
             </div>
+
         </div>
 
-        <div class="card reveal" style="transition-delay: 0.1s;">
-            <p class="subtitle">Venue</p>
-            <h3 class="serif" style="margin-bottom: 5px; font-size: 1.4rem;">Pandikkad, Velluvangad</h3>
-            <a href="https://maps.app.goo.gl/SJsyKaQeRbm8jcac9?g_st=ac" target="_blank" class="map-btn">Get Directions</a>
-        </div>
-
-        <div class="card reveal" style="transition-delay: 0.1s;">
-            <p class="subtitle" style="margin-bottom: 15px;">With the blessings of</p>
-            <h4 class="serif" style="color: #94a3b8; margin-bottom: 25px; font-size: 1.2rem;">Almighty & Elders</h4>
-            
-            <p class="footer-text">
-                Your presence will make our day even more special.
-                <strong>PLEASE GRACE US WITH YOUR PRESENCE</strong>
-            </p>
-        </div>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Intersection Observer for 3D scroll animations
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.15
-            };
 
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                    }
-                });
-            }, observerOptions);
+    <div class="scroll-hint">
+        Scroll to discover
+    </div>
 
-            const revealElements = document.querySelectorAll('.reveal');
-            revealElements.forEach((el) => {
-                observer.observe(el);
+</section>
+
+
+<!-- ======================================================
+     BLESSINGS
+====================================================== -->
+
+<section class="section blessings">
+
+    <div class="section-inner reveal from-back">
+
+        <div class="blessing-orbit">
+
+            <div class="blessing-symbol">
+                ✦
+            </div>
+
+        </div>
+
+        <div class="section-label">
+            With The Blessings Of
+        </div>
+
+        <h2 class="section-title">
+            Family,<br>
+            Love & Grace
+        </h2>
+
+        <p class="section-copy">
+            We are delighted to open the doors of our
+            new home and begin a beautiful new chapter
+            surrounded by the people who mean the most
+            to us.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     DETAILS
+====================================================== -->
+
+<section class="section details">
+
+    <div class="section-inner">
+
+        <div class="section-label reveal from-left">
+            Join Us
+        </div>
+
+        <h2 class="section-title reveal from-back">
+            The Details
+        </h2>
+
+
+        <div class="details-grid">
+
+            <!-- DATE -->
+
+            <div class="detail-card reveal from-left">
+
+                <div class="detail-icon">
+                    ◷
+                </div>
+
+                <small>
+                    Date
+                </small>
+
+                <strong>
+                    06 September<br>
+                    2026
+                </strong>
+
+            </div>
+
+
+            <!-- TIME -->
+
+            <div class="detail-card reveal from-right">
+
+                <div class="detail-icon">
+                    ◌
+                </div>
+
+                <small>
+                    Time
+                </small>
+
+                <strong>
+                    4 PM — 8 PM
+                </strong>
+
+            </div>
+
+
+            <!-- VENUE -->
+
+            <div class="detail-card reveal from-diagonal">
+
+                <div class="detail-icon">
+                    ⌖
+                </div>
+
+                <small>
+                    Venue
+                </small>
+
+                <strong>
+                    Pandikkad,<br>
+                    Velluvangad
+                </strong>
+
+                <a
+                    class="map-button"
+                    href="https://maps.app.goo.gl/SJsyKaQeRbm8jcac9?g_st=ac"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Open in Maps
+                    <span>↗</span>
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     COUNTDOWN
+====================================================== -->
+
+<section class="section countdown-section">
+
+    <div class="section-inner">
+
+        <div class="section-label reveal from-left">
+            Until We Celebrate
+        </div>
+
+        <h2 class="section-title reveal from-back">
+            The Moment Awaits
+        </h2>
+
+        <div class="countdown-grid reveal from-front">
+
+            <div class="count">
+                <strong id="days">00</strong>
+                <span>Days</span>
+            </div>
+
+            <div class="count">
+                <strong id="hours">00</strong>
+                <span>Hours</span>
+            </div>
+
+            <div class="count">
+                <strong id="minutes">00</strong>
+                <span>Minutes</span>
+            </div>
+
+            <div class="count">
+                <strong id="seconds">00</strong>
+                <span>Seconds</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     FINAL MESSAGE
+====================================================== -->
+
+<section class="section final">
+
+    <div class="section-inner reveal from-rotate">
+
+        <div class="quote-mark">
+            “
+        </div>
+
+        <div class="final-quote">
+            Your presence will make
+            our day even more special.
+        </div>
+
+        <p class="section-copy">
+
+            Please grace us with your presence
+            as we celebrate this beautiful milestone
+            and the beginning of a new chapter.
+
+        </p>
+
+        <div class="signature">
+
+            With love,<br>
+
+            Akbar Ali & Nabla
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     FOOTER
+====================================================== -->
+
+<footer>
+
+    <div class="footer-star">
+        ✦
+    </div>
+
+    <p>
+        We can't wait to welcome you home.
+    </p>
+
+    <small>
+        CHAKKIPPARAMBAN HOUSE • 2026
+    </small>
+
+</footer>
+
+
+<script>
+
+/* =========================================================
+   LOADER
+========================================================= */
+
+window.addEventListener("load", () => {
+
+    setTimeout(() => {
+
+        document
+            .getElementById("loader")
+            .classList.add("hide");
+
+    }, 900);
+
+});
+
+
+/* =========================================================
+   PARTICLES
+========================================================= */
+
+const particleBox =
+    document.getElementById("particles");
+
+for (let i = 0; i < 38; i++) {
+
+    const particle =
+        document.createElement("div");
+
+    particle.className = "particle";
+
+    particle.style.left =
+        Math.random() * 100 + "%";
+
+    particle.style.animationDuration =
+        (9 + Math.random() * 14) + "s";
+
+    particle.style.animationDelay =
+        (-Math.random() * 20) + "s";
+
+    particle.style.opacity =
+        Math.random() * .5;
+
+    particleBox.appendChild(particle);
+}
+
+
+/* =========================================================
+   HERO 3D POINTER
+========================================================= */
+
+const hero =
+    document.querySelector(".hero");
+
+const heroCard =
+    document.getElementById("heroCard");
+
+let pointerActive = false;
+
+hero.addEventListener("pointermove", e => {
+
+    if (window.innerWidth < 700) return;
+
+    const rect =
+        hero.getBoundingClientRect();
+
+    const x =
+        (e.clientX - rect.left) /
+        rect.width - .5;
+
+    const y =
+        (e.clientY - rect.top) /
+        rect.height - .5;
+
+    heroCard.style.transform = `
+        perspective(1300px)
+        rotateX(${y * -7}deg)
+        rotateY(${x * 8}deg)
+        translateZ(20px)
+    `;
+
+    pointerActive = true;
+});
+
+
+hero.addEventListener("pointerleave", () => {
+
+    if (!pointerActive) return;
+
+    heroCard.style.transform = `
+        perspective(1300px)
+        rotateX(0deg)
+        rotateY(0deg)
+        translateZ(0)
+    `;
+
+});
+
+
+/* =========================================================
+   MOBILE TILT
+========================================================= */
+
+let touchStartX = 0;
+let touchStartY = 0;
+
+hero.addEventListener("touchstart", e => {
+
+    touchStartX =
+        e.touches[0].clientX;
+
+    touchStartY =
+        e.touches[0].clientY;
+
+}, { passive: true });
+
+
+hero.addEventListener("touchmove", e => {
+
+    if (window.innerWidth > 699)
+        return;
+
+    const dx =
+        e.touches[0].clientX -
+        touchStartX;
+
+    const dy =
+        e.touches[0].clientY -
+        touchStartY;
+
+    heroCard.style.transform = `
+        perspective(900px)
+        rotateY(${dx * .035}deg)
+        rotateX(${dy * -.025}deg)
+    `;
+
+}, { passive: true });
+
+
+hero.addEventListener("touchend", () => {
+
+    heroCard.style.transform = `
+        perspective(900px)
+        rotateX(0)
+        rotateY(0)
+        translateZ(0)
+    `;
+
+});
+
+
+/* =========================================================
+   ADVANCED REVEAL OBSERVER
+========================================================= */
+
+const revealItems =
+    document.querySelectorAll(".reveal");
+
+const revealObserver =
+    new IntersectionObserver(
+
+        entries => {
+
+            entries.forEach(entry => {
+
+                if (!entry.isIntersecting)
+                    return;
+
+                const element =
+                    entry.target;
+
+                element.classList.add("active");
+
+                revealObserver.unobserve(element);
+
             });
 
-            // Parallax Tilt Effect for Desktop/Interactive Mobile
-            const cards = document.querySelectorAll('.card');
-            
-            cards.forEach(card => {
-                card.addEventListener('mousemove', e => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    
-                    const rotateX = ((y - centerY) / centerY) * -10; // Max 10 deg rotation
-                    const rotateY = ((x - centerX) / centerX) * 10;
-                    
-                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-                    card.style.transition = 'transform 0.1s ease';
+        },
+
+        {
+            threshold: .12,
+            rootMargin: "0px 0px -50px 0px"
+        }
+
+    );
+
+
+revealItems.forEach(element => {
+
+    revealObserver.observe(element);
+
+});
+
+
+/* =========================================================
+   STAGGER DETAIL CARDS
+========================================================= */
+
+document
+    .querySelectorAll(".details-grid .reveal")
+    .forEach((card, index) => {
+
+        card.style.transitionDelay =
+            `${index * 130}ms`;
+
+    });
+
+
+/* =========================================================
+   SCROLL PROGRESS
+========================================================= */
+
+const progress =
+    document.getElementById("progress");
+
+function updateProgress() {
+
+    const scrollTop =
+        window.scrollY;
+
+    const documentHeight =
+        document.documentElement.scrollHeight -
+        window.innerHeight;
+
+    const percentage =
+        documentHeight > 0
+        ? (scrollTop / documentHeight) * 100
+        : 0;
+
+    progress.style.width =
+        percentage + "%";
+
+}
+
+window.addEventListener(
+    "scroll",
+    updateProgress,
+    { passive: true }
+);
+
+updateProgress();
+
+
+/* =========================================================
+   PARALLAX BACKGROUND
+========================================================= */
+
+let parallaxTick = false;
+
+window.addEventListener(
+    "scroll",
+    () => {
+
+        if (parallaxTick)
+            return;
+
+        parallaxTick = true;
+
+        requestAnimationFrame(() => {
+
+            const scroll =
+                window.scrollY;
+
+            document
+                .querySelectorAll(".blessing-orbit")
+                .forEach(el => {
+
+                    const movement =
+                        scroll * .025;
+
+                    el.style.transform =
+                        `rotate(${movement}deg)`;
+
                 });
 
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-                    card.style.transition = 'transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-                });
-            });
+            parallaxTick = false;
+
         });
-    </script>
+
+    },
+
+    { passive: true }
+);
+
+
+/* =========================================================
+   COUNTDOWN
+========================================================= */
+
+const eventDate =
+    new Date(
+        "2026-09-06T16:00:00+05:30"
+    );
+
+function updateCountdown() {
+
+    const now =
+        new Date();
+
+    let difference =
+        eventDate - now;
+
+    if (difference < 0)
+        difference = 0;
+
+    const days =
+        Math.floor(
+            difference /
+            (1000 * 60 * 60 * 24)
+        );
+
+    const hours =
+        Math.floor(
+            (difference /
+            (1000 * 60 * 60)) % 24
+        );
+
+    const minutes =
+        Math.floor(
+            (difference /
+            (1000 * 60)) % 60
+        );
+
+    const seconds =
+        Math.floor(
+            (difference / 1000) % 60
+        );
+
+    document.getElementById("days")
+        .textContent =
+        String(days).padStart(2,"0");
+
+    document.getElementById("hours")
+        .textContent =
+        String(hours).padStart(2,"0");
+
+    document.getElementById("minutes")
+        .textContent =
+        String(minutes).padStart(2,"0");
+
+    document.getElementById("seconds")
+        .textContent =
+        String(seconds).padStart(2,"0");
+
+}
+
+updateCountdown();
+
+setInterval(
+    updateCountdown,
+    1000
+);
+
+
+/* =========================================================
+   PREVENT DOUBLE TAP ZOOM
+========================================================= */
+
+let lastTouchEnd = 0;
+
+document.addEventListener(
+    "touchend",
+    event => {
+
+        const now =
+            Date.now();
+
+        if (now - lastTouchEnd <= 300) {
+
+            event.preventDefault();
+
+        }
+
+        lastTouchEnd = now;
+
+    },
+    false
+);
+
+</script>
+
 </body>
 </html>
