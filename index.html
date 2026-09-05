@@ -1,1050 +1,307 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
-
-<meta name="theme-color" content="#0d1713">
-<meta name="description" content="You are warmly invited to the housewarming ceremony of Akbar Ali & Nabla.">
-
-<title>Housewarming Ceremony — Akbar Ali & Nabla</title>
-
-<style>
-/* =========================================================
-   PREMIUM HOUSEWARMING INVITATION
-   Mobile-first • 3D • Cinematic • Smooth Motion
-========================================================= */
-
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
-
-:root {
-    --bg: #f6f1e7;
-    --paper: #fffdf8;
-    --green: #10251d;
-    --green-2: #18382c;
-    --gold: #c5a45b;
-    --gold-light: #e8d29a;
-    --muted: #756f63;
-    --line: rgba(197,164,91,.28);
-    --shadow: 0 25px 70px rgba(16,37,29,.16);
-
-    --serif: "Cormorant Garamond", Georgia, serif;
-    --sans: "DM Sans", sans-serif;
-}
-
-/* ---------- RESET ---------- */
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    background: var(--bg);
-    color: var(--green);
-    font-family: var(--sans);
-    overflow-x: hidden;
-}
-
-/* ---------- LOADER ---------- */
-
-.loader {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    background: var(--green);
-    display: grid;
-    place-items: center;
-    transition: opacity 1s ease, visibility 1s ease;
-}
-
-.loader.hide {
-    opacity: 0;
-    visibility: hidden;
-}
-
-.loader-inner {
-    text-align: center;
-    color: var(--gold-light);
-}
-
-.loader-ring {
-    width: 70px;
-    height: 70px;
-    border: 1px solid rgba(232,210,154,.3);
-    border-top-color: var(--gold-light);
-    border-radius: 50%;
-    animation: spin 1.3s linear infinite;
-    margin: auto auto 18px;
-}
-
-.loader p {
-    font-size: 10px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-/* ---------- PARTICLES ---------- */
-
-#particles {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 2;
-}
-
-.particle {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
-    background: var(--gold);
-    opacity: .35;
-    animation: floatParticle linear infinite;
-}
-
-@keyframes floatParticle {
-    0% {
-        transform: translate3d(0, 110vh, 0) scale(.5);
-        opacity: 0;
-    }
-    15% { opacity: .5; }
-    85% { opacity: .5; }
-    100% {
-        transform: translate3d(30px, -10vh, 0) scale(1);
-        opacity: 0;
-    }
-}
-
-/* ---------- HERO ---------- */
-
-.hero {
-    min-height: 100svh;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 35px 20px;
-    overflow: hidden;
-    background:
-        radial-gradient(circle at 20% 20%, rgba(197,164,91,.12), transparent 30%),
-        radial-gradient(circle at 90% 80%, rgba(24,56,44,.15), transparent 35%),
-        var(--bg);
-}
-
-/* decorative orbit */
-
-.hero::before,
-.hero::after {
-    content: "";
-    position: absolute;
-    border: 1px solid var(--line);
-    border-radius: 50%;
-    pointer-events: none;
-}
-
-.hero::before {
-    width: 85vw;
-    height: 85vw;
-    max-width: 500px;
-    max-height: 500px;
-    animation: orbit 18s linear infinite;
-}
-
-.hero::after {
-    width: 115vw;
-    height: 115vw;
-    max-width: 700px;
-    max-height: 700px;
-    opacity: .35;
-    animation: orbitReverse 25s linear infinite;
-}
-
-@keyframes orbit {
-    to { transform: rotate(360deg); }
-}
-
-@keyframes orbitReverse {
-    to { transform: rotate(-360deg); }
-}
-
-/* ---------- INVITATION CARD ---------- */
-
-.invitation-card {
-    position: relative;
-    z-index: 5;
-    width: min(100%, 440px);
-    min-height: 690px;
-    padding: 45px 25px;
-    border: 1px solid rgba(197,164,91,.45);
-    background:
-        linear-gradient(145deg, rgba(255,255,255,.94), rgba(250,246,237,.92));
-    box-shadow: var(--shadow);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-
-    transform-style: preserve-3d;
-    transition:
-        transform .18s cubic-bezier(.2,.8,.2,1),
-        box-shadow .5s ease;
-}
-
-.invitation-card::before {
-    content: "";
-    position: absolute;
-    inset: 9px;
-    border: 1px solid var(--line);
-    pointer-events: none;
-}
-
-.invitation-card::after {
-    content: "✦";
-    position: absolute;
-    top: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: var(--gold);
-    font-size: 14px;
-}
-
-/* ---------- TYPOGRAPHY ---------- */
-
-.eyebrow {
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 4px;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-bottom: 18px;
-}
-
-.warmly {
-    font-family: var(--serif);
-    font-size: 18px;
-    font-style: italic;
-    color: var(--muted);
-    margin-bottom: 6px;
-}
-
-.hero h1 {
-    font-family: var(--serif);
-    font-size: clamp(50px, 15vw, 76px);
-    line-height: .82;
-    font-weight: 500;
-    letter-spacing: -2px;
-    text-transform: uppercase;
-    color: var(--green);
-    text-shadow: 0 4px 20px rgba(16,37,29,.08);
-}
-
-.hero h1 span {
-    display: block;
-    font-size: .65em;
-    letter-spacing: 5px;
-    margin-top: 12px;
-}
-
-.divider {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 28px 0;
-    width: 100%;
-    justify-content: center;
-}
-
-.divider::before,
-.divider::after {
-    content: "";
-    width: 55px;
-    height: 1px;
-    background: var(--gold);
-    opacity: .6;
-}
-
-.divider span {
-    color: var(--gold);
-    font-size: 15px;
-}
-
-.home-label {
-    font-size: 8px;
-    letter-spacing: 3px;
-    color: var(--muted);
-    text-transform: uppercase;
-    margin-bottom: 7px;
-}
-
-.home-name {
-    font-family: var(--serif);
-    font-size: 32px;
-    font-weight: 600;
-    margin-bottom: 28px;
-}
-
-.with-love {
-    font-size: 8px;
-    letter-spacing: 4px;
-    color: var(--muted);
-    text-transform: uppercase;
-    margin-bottom: 7px;
-}
-
-.names {
-    font-family: var(--serif);
-    font-size: 25px;
-    font-weight: 500;
-}
-
-.names span {
-    color: var(--gold);
-    font-size: 16px;
-    padding: 0 7px;
-}
-
-.date-time {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 23px;
-    margin-top: 32px;
-}
-
-.date-block,
-.time-block {
-    text-align: center;
-}
-
-.date-block strong {
-    font-family: var(--serif);
-    font-size: 28px;
-    font-weight: 600;
-}
-
-.date-block small,
-.time-block small {
-    display: block;
-    font-size: 8px;
-    letter-spacing: 2px;
-    color: var(--muted);
-    text-transform: uppercase;
-}
-
-.time-block strong {
-    font-family: var(--serif);
-    font-size: 24px;
-    font-weight: 500;
-}
-
-.vertical-line {
-    width: 1px;
-    height: 43px;
-    background: var(--line);
-}
-
-.scroll-hint {
-    position: absolute;
-    bottom: 20px;
-    z-index: 10;
-    font-size: 8px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--muted);
-    animation: breathe 2s ease-in-out infinite;
-}
-
-.scroll-hint::after {
-    content: "↓";
-    display: block;
-    text-align: center;
-    font-size: 17px;
-    margin-top: 5px;
-}
-
-@keyframes breathe {
-    50% { transform: translateY(6px); opacity: .5; }
-}
-
-/* ---------- SECTIONS ---------- */
-
-section:not(.hero) {
-    position: relative;
-    padding: 100px 22px;
-}
-
-.section-inner {
-    max-width: 900px;
-    margin: auto;
-}
-
-.section-tag {
-    text-align: center;
-    font-size: 9px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 15px;
-}
-
-.section-title {
-    font-family: var(--serif);
-    font-size: clamp(40px, 12vw, 65px);
-    font-weight: 500;
-    line-height: .95;
-    text-align: center;
-    margin-bottom: 28px;
-}
-
-.section-text {
-    max-width: 580px;
-    margin: auto;
-    text-align: center;
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 1.9;
-}
-
-/* ---------- BLESSINGS ---------- */
-
-.blessings {
-    background: var(--green);
-    color: white;
-    overflow: hidden;
-}
-
-.blessings::before {
-    content: "✦";
-    position: absolute;
-    font-size: 250px;
-    opacity: .025;
-    left: -50px;
-    top: 30px;
-}
-
-.blessings .section-text {
-    color: rgba(255,255,255,.65);
-}
-
-/* ---------- DETAILS ---------- */
-
-.details {
-    background: var(--paper);
-}
-
-.detail-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 15px;
-    margin-top: 40px;
-}
-
-.detail-card {
-    position: relative;
-    padding: 30px 20px;
-    text-align: center;
-    background: #faf7f0;
-    border: 1px solid var(--line);
-    transition:
-        transform .5s cubic-bezier(.2,.8,.2,1),
-        box-shadow .5s ease;
-}
-
-.detail-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 18px 40px rgba(16,37,29,.1);
-}
-
-.detail-icon {
-    font-size: 23px;
-    color: var(--gold);
-    margin-bottom: 12px;
-}
-
-.detail-card small {
-    display: block;
-    font-size: 8px;
-    letter-spacing: 3px;
-    color: var(--muted);
-    text-transform: uppercase;
-    margin-bottom: 8px;
-}
-
-.detail-card strong {
-    font-family: var(--serif);
-    font-size: 24px;
-    font-weight: 600;
-}
-
-.venue {
-    margin-top: 15px;
-}
-
-/* ---------- MESSAGE ---------- */
-
-.message {
-    min-height: 80svh;
-    display: grid;
-    place-items: center;
-    overflow: hidden;
-}
-
-.message-card {
-    max-width: 650px;
-    text-align: center;
-}
-
-.quote {
-    font-family: var(--serif);
-    font-size: clamp(34px, 9vw, 55px);
-    line-height: 1.1;
-    font-style: italic;
-}
-
-.quote-mark {
-    display: block;
-    color: var(--gold);
-    font-size: 60px;
-    line-height: .5;
-    margin-bottom: 20px;
-}
-
-.signature {
-    margin-top: 35px;
-    font-family: var(--serif);
-    font-size: 24px;
-}
-
-/* ---------- FOOTER ---------- */
-
-footer {
-    background: var(--green);
-    color: white;
-    text-align: center;
-    padding: 60px 20px calc(60px + env(safe-area-inset-bottom));
-}
-
-.footer-mark {
-    color: var(--gold);
-    font-size: 22px;
-    margin-bottom: 15px;
-}
-
-footer p {
-    font-family: var(--serif);
-    font-size: 25px;
-}
-
-footer small {
-    display: block;
-    margin-top: 15px;
-    font-size: 8px;
-    letter-spacing: 3px;
-    opacity: .5;
-}
-
-/* ---------- SCROLL REVEAL ---------- */
-
-.reveal {
-    opacity: 0;
-    transform: translateY(50px) scale(.97);
-    transition:
-        opacity 1s cubic-bezier(.2,.8,.2,1),
-        transform 1s cubic-bezier(.2,.8,.2,1);
-}
-
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-}
-
-/* ---------- DESKTOP ---------- */
-
-@media (min-width: 700px) {
-
-    .hero {
-        padding: 70px;
-    }
-
-    .invitation-card {
-        min-height: 760px;
-        padding: 70px;
-    }
-
-    .detail-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    section:not(.hero) {
-        padding: 130px 40px;
-    }
-}
-
-/* ---------- REDUCE MOTION ---------- */
-
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-        transition-duration: .01ms !important;
-    }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Housewarming Ceremony | Akbar Ali & Nabla</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --gold-light: #fde047;
+            --gold-main: #fbbf24;
+            --gold-dark: #b45309;
+            --bg-color: #022c22;
+            --bg-gradient: linear-gradient(135deg, #022c22 0%, #064e3b 50%, #0f172a 100%);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: #f8fafc;
+            overflow-x: hidden;
+            perspective: 1000px; /* Essential for 3D effects */
+        }
+
+        /* Animated Background Particles */
+        .background-animation {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--gold-main) 0%, transparent 70%);
+            opacity: 0.15;
+            animation: float 20s infinite ease-in-out alternate;
+        }
+        .circle:nth-child(1) { width: 300px; height: 300px; top: -10%; left: -10%; animation-duration: 25s; }
+        .circle:nth-child(2) { width: 400px; height: 400px; bottom: -10%; right: -10%; animation-duration: 22s; }
+        .circle:nth-child(3) { width: 200px; height: 200px; top: 40%; left: 60%; animation-duration: 18s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -50px) scale(1.1); }
+            100% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        /* Main Container - Mobile Optimized */
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* Glassmorphism Cards */
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 35px 25px;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transform-style: preserve-3d;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .gold-text {
+            background: linear-gradient(to right, var(--gold-light), var(--gold-main), var(--gold-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+
+        .subtitle {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #94a3b8;
+            margin-bottom: 10px;
+        }
+
+        .title-main {
+            font-size: 2.2rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .cursive {
+            font-style: italic;
+            font-weight: 400;
+            font-size: 2.5rem;
+        }
+
+        .house-name {
+            font-size: 1.8rem;
+            color: var(--gold-main);
+            margin: 10px 0 25px 0;
+        }
+
+        .names {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        /* Grid for Date & Time */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            position: relative;
+        }
+        
+        .info-grid::after {
+            content: '';
+            position: absolute;
+            top: 10%; bottom: 10%; left: 50%;
+            width: 1px;
+            background: var(--glass-border);
+        }
+
+        .info-item p {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #f8fafc;
+            margin-top: 5px;
+        }
+
+        /* Jumping Button */
+        .map-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 15px 35px;
+            background: linear-gradient(135deg, var(--gold-main), var(--gold-dark));
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 20px rgba(251, 191, 36, 0.3);
+            animation: jump 2s infinite cubic-bezier(0.28, 0.84, 0.42, 1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .map-btn:active {
+            transform: scale(0.95);
+        }
+
+        @keyframes jump {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-15px); }
+            60% { transform: translateY(-7px); }
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #cbd5e1;
+        }
+
+        .footer-text strong {
+            display: block;
+            margin-top: 15px;
+            color: var(--gold-main);
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        /* 3D Scroll Animations Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(80px) rotateX(-25deg) scale(0.9);
+            transition: all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) rotateX(0) scale(1);
+        }
+
+    </style>
 </head>
-
 <body>
 
-<!-- LOADER -->
-<div class="loader" id="loader">
-    <div class="loader-inner">
-        <div class="loader-ring"></div>
-        <p>Opening Invitation</p>
+    <div class="background-animation">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
     </div>
-</div>
 
-<!-- PARTICLES -->
-<div id="particles"></div>
-
-<!-- ======================================================
-     HERO
-====================================================== -->
-
-<main>
-
-<section class="hero" id="home">
-
-    <div class="invitation-card" id="invitationCard">
-
-        <div class="eyebrow">
-            A New Beginning
-        </div>
-
-        <div class="warmly">
-            You are warmly invited to our
-        </div>
-
-        <h1>
-            Housewarming
-            <span>Ceremony</span>
-        </h1>
-
-        <div class="divider">
-            <span>✦</span>
-        </div>
-
-        <div class="home-label">
-            At Our New Home
-        </div>
-
-        <div class="home-name">
-            Chakkipparamban House
-        </div>
-
-        <div class="with-love">
-            With Love
-        </div>
-
-        <div class="names">
-            Akbar Ali
-            <span>&</span>
-            Nabla
-        </div>
-
-        <div class="date-time">
-
-            <div class="date-block">
-                <small>Date</small>
-                <strong>06</strong>
-                <small>September 2026</small>
+    <div class="container">
+        <div class="card reveal active" style="transition-delay: 0.1s;">
+            <p class="subtitle">You are warmly invited to our</p>
+            <h1 class="title-main gold-text">HOUSEWARMING<br><span class="cursive">Ceremony</span></h1>
+            
+            <p class="subtitle" style="margin-top: 20px;">At our new home</p>
+            <h2 class="house-name">Chakkipparamban House</h2>
+            
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--glass-border);">
+                <p class="subtitle">With Love</p>
+                <h3 class="names gold-text">Akbar Ali & Nabla</h3>
             </div>
+        </div>
 
-            <div class="vertical-line"></div>
-
-            <div class="time-block">
-                <small>Time</small>
-                <strong>4 PM</strong>
-                <small>To 8 PM</small>
+        <div class="card reveal" style="transition-delay: 0.1s;">
+            <div class="info-grid">
+                <div class="info-item">
+                    <p class="subtitle">Date</p>
+                    <p class="serif">6 SEPTEMBER<br>2026</p>
+                </div>
+                <div class="info-item">
+                    <p class="subtitle">Time</p>
+                    <p class="serif">4 PM<br>TO 8 PM</p>
+                </div>
             </div>
-
         </div>
 
+        <div class="card reveal" style="transition-delay: 0.1s;">
+            <p class="subtitle">Venue</p>
+            <h3 class="serif" style="margin-bottom: 5px; font-size: 1.4rem;">Pandikkad, Velluvangad</h3>
+            <a href="https://maps.app.goo.gl/SJsyKaQeRbm8jcac9?g_st=ac" target="_blank" class="map-btn">Get Directions</a>
+        </div>
+
+        <div class="card reveal" style="transition-delay: 0.1s;">
+            <p class="subtitle" style="margin-bottom: 15px;">With the blessings of</p>
+            <h4 class="serif" style="color: #94a3b8; margin-bottom: 25px; font-size: 1.2rem;">Almighty & Elders</h4>
+            
+            <p class="footer-text">
+                Your presence will make our day even more special.
+                <strong>PLEASE GRACE US WITH YOUR PRESENCE</strong>
+            </p>
+        </div>
     </div>
 
-    <div class="scroll-hint">
-        Scroll to discover
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     BLESSINGS
-====================================================== -->
-
-<section class="blessings">
-
-    <div class="section-inner reveal">
-
-        <div class="section-tag">
-            With the blessings of
-        </div>
-
-        <h2 class="section-title">
-            Family,<br>
-            Love & Grace
-        </h2>
-
-        <p class="section-text">
-            We are delighted to open the doors of our new home
-            and begin a beautiful new chapter surrounded by
-            the people who mean the most to us.
-        </p>
-
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     DETAILS
-====================================================== -->
-
-<section class="details">
-
-    <div class="section-inner">
-
-        <div class="section-tag reveal">
-            Join us
-        </div>
-
-        <h2 class="section-title reveal">
-            The Details
-        </h2>
-
-        <div class="detail-grid">
-
-            <div class="detail-card reveal">
-                <div class="detail-icon">◷</div>
-                <small>Date</small>
-                <strong>06 September</strong>
-            </div>
-
-            <div class="detail-card reveal">
-                <div class="detail-icon">⌁</div>
-                <small>Time</small>
-                <strong>4 PM — 8 PM</strong>
-            </div>
-
-            <div class="detail-card venue reveal">
-                <div class="detail-icon">⌖</div>
-                <small>Venue</small>
-                <strong>Pandikkad,<br>Velluvangad</strong>
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     MESSAGE
-====================================================== -->
-
-<section class="message">
-
-    <div class="message-card reveal">
-
-        <span class="quote-mark">“</span>
-
-        <div class="quote">
-            Your presence will make
-            our day even more special.
-        </div>
-
-        <p class="section-text" style="margin-top:25px;">
-            Please grace us with your presence
-            as we celebrate this beautiful milestone
-            and the beginning of a new chapter.
-        </p>
-
-        <div class="signature">
-            With love,<br>
-            Akbar Ali & Nabla
-        </div>
-
-    </div>
-
-</section>
-
-</main>
-
-
-<!-- ======================================================
-     FOOTER
-====================================================== -->
-
-<footer>
-
-    <div class="footer-mark">✦</div>
-
-    <p>
-        We can't wait to welcome you home.
-    </p>
-
-    <small>
-        CHAKKIPPARAMBAN HOUSE • 2026
-    </small>
-
-</footer>
-
-
-<script>
-
-/* =========================================================
-   LOADER
-========================================================= */
-
-window.addEventListener("load", () => {
-
-    setTimeout(() => {
-        document.getElementById("loader")
-            .classList.add("hide");
-    }, 900);
-
-});
-
-
-/* =========================================================
-   FLOATING PARTICLES
-========================================================= */
-
-const particleContainer =
-    document.getElementById("particles");
-
-for (let i = 0; i < 30; i++) {
-
-    const particle =
-        document.createElement("div");
-
-    particle.className = "particle";
-
-    particle.style.left =
-        Math.random() * 100 + "%";
-
-    particle.style.animationDuration =
-        (8 + Math.random() * 14) + "s";
-
-    particle.style.animationDelay =
-        (-Math.random() * 15) + "s";
-
-    particle.style.transform =
-        `scale(${0.4 + Math.random()})`;
-
-    particleContainer.appendChild(particle);
-}
-
-
-/* =========================================================
-   3D CARD MOTION
-========================================================= */
-
-const card =
-    document.getElementById("invitationCard");
-
-const hero =
-    document.querySelector(".hero");
-
-hero.addEventListener("pointermove", (e) => {
-
-    if (window.innerWidth < 700) return;
-
-    const rect =
-        hero.getBoundingClientRect();
-
-    const x =
-        (e.clientX - rect.left) / rect.width - .5;
-
-    const y =
-        (e.clientY - rect.top) / rect.height - .5;
-
-    card.style.transform = `
-        perspective(1200px)
-        rotateX(${y * -7}deg)
-        rotateY(${x * 7}deg)
-        translateZ(15px)
-    `;
-});
-
-hero.addEventListener("pointerleave", () => {
-
-    card.style.transform = `
-        perspective(1200px)
-        rotateX(0)
-        rotateY(0)
-        translateZ(0)
-    `;
-});
-
-
-/* =========================================================
-   SCROLL REVEAL ENGINE
-========================================================= */
-
-const revealElements =
-    document.querySelectorAll(".reveal");
-
-const observer =
-    new IntersectionObserver(
-        entries => {
-
-            entries.forEach(entry => {
-
-                if (entry.isIntersecting) {
-
-                    entry.target.classList.add("active");
-
-                    observer.unobserve(entry.target);
-                }
-
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Intersection Observer for 3D scroll animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            const revealElements = document.querySelectorAll('.reveal');
+            revealElements.forEach((el) => {
+                observer.observe(el);
             });
 
-        },
-        {
-            threshold: .12,
-            rootMargin: "0px 0px -40px 0px"
-        }
-    );
+            // Parallax Tilt Effect for Desktop/Interactive Mobile
+            const cards = document.querySelectorAll('.card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateX = ((y - centerY) / centerY) * -10; // Max 10 deg rotation
+                    const rotateY = ((x - centerX) / centerX) * 10;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                    card.style.transition = 'transform 0.1s ease';
+                });
 
-revealElements.forEach(el =>
-    observer.observe(el)
-);
-
-
-/* =========================================================
-   CINEMATIC PARALLAX
-========================================================= */
-
-let ticking = false;
-
-window.addEventListener("scroll", () => {
-
-    if (!ticking) {
-
-        requestAnimationFrame(() => {
-
-            const scroll =
-                window.scrollY;
-
-            const rings =
-                document.querySelectorAll(
-                    ".hero::before"
-                );
-
-            document.querySelector(
-                ".invitation-card"
-            ).style.setProperty(
-                "--scrollY",
-                scroll
-            );
-
-            ticking = false;
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                    card.style.transition = 'transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                });
+            });
         });
-
-        ticking = true;
-    }
-
-});
-
-
-/* =========================================================
-   MOBILE TOUCH TILT
-========================================================= */
-
-let startX = 0;
-let startY = 0;
-
-hero.addEventListener("touchstart", e => {
-
-    startX = e.touches[0].clientX;
-    startY = e.touches[0].clientY;
-
-}, { passive: true });
-
-
-hero.addEventListener("touchmove", e => {
-
-    if (window.innerWidth > 699) return;
-
-    const x = e.touches[0].clientX;
-    const y = e.touches[0].clientY;
-
-    const dx = x - startX;
-    const dy = y - startY;
-
-    card.style.transform = `
-        perspective(900px)
-        rotateY(${dx * .025}deg)
-        rotateX(${dy * -.025}deg)
-    `;
-
-}, { passive: true });
-
-
-hero.addEventListener("touchend", () => {
-
-    card.style.transform = `
-        perspective(900px)
-        rotateX(0deg)
-        rotateY(0deg)
-    `;
-
-});
-
-
-/* =========================================================
-   DYNAMIC DATE MICRO EFFECT
-========================================================= */
-
-const dateBlock =
-    document.querySelector(".date-block strong");
-
-dateBlock.animate(
-    [
-        {
-            opacity: 0,
-            transform: "translateY(15px)"
-        },
-        {
-            opacity: 1,
-            transform: "translateY(0)"
-        }
-    ],
-    {
-        duration: 1200,
-        delay: 1300,
-        easing: "cubic-bezier(.2,.8,.2,1)",
-        fill: "forwards"
-    }
-);
-
-</script>
-
+    </script>
 </body>
 </html>
