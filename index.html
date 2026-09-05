@@ -45,9 +45,8 @@
 <style>
 
 /* =========================================================
-   ROOT
+   ROOT TOKENS
 ========================================================= */
-
 :root {
     --night: #071711;
     --green: #0d2a20;
@@ -66,1251 +65,642 @@
 
     --serif: "Cormorant Garamond", Georgia, serif;
     --sans: "DM Sans", Arial, sans-serif;
+
+    /* motion tokens — reused everywhere so easing stays consistent */
+    --ease-smooth: cubic-bezier(.16,1,.3,1);
+    --ease-soft: cubic-bezier(.22,.61,.36,1);
+    --ease-spring: cubic-bezier(.34,1.56,.64,1);
 }
 
 
 /* =========================================================
    RESET
 ========================================================= */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-    background: var(--night);
-}
+html { scroll-behavior: smooth; background: var(--night); }
 
 body {
     min-width: 320px;
     overflow-x: hidden;
-
     font-family: var(--sans);
     background: var(--cream);
     color: var(--text-dark);
 }
 
-button,
-a {
-    -webkit-tap-highlight-color: transparent;
+button, a { -webkit-tap-highlight-color: transparent; font: inherit; }
+
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
 }
 
 
 /* =========================================================
    LOADER
 ========================================================= */
-
 #loader {
     position: fixed;
     inset: 0;
     z-index: 99999;
-
     display: grid;
     place-items: center;
-
-    background:
-        radial-gradient(circle at center,
-            #174432 0%,
-            #0b2119 42%,
-            #050e0a 100%);
-
-    transition:
-        opacity 1s cubic-bezier(.77,0,.18,1),
-        visibility 1s;
+    background: radial-gradient(circle at center, #174432 0%, #0b2119 42%, #050e0a 100%);
+    transition: opacity .9s var(--ease-smooth), visibility .9s;
 }
 
-#loader.hide {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
+#loader.hide { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.loader-content { text-align: center; color: var(--gold-light); }
+
+.loader-ring { position: relative; width: 84px; height: 84px; margin: 0 auto 22px; }
+
+.loader-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+
+.ring-track { fill: none; stroke: rgba(240,217,155,.15); stroke-width: 1.5; }
+
+.ring-fill {
+    fill: none;
+    stroke: var(--gold-light);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-dasharray: 276.5;
+    stroke-dashoffset: 276.5;
+    filter: drop-shadow(0 0 6px rgba(240,217,155,.55));
 }
 
-.loader-content {
-    text-align: center;
-    color: var(--gold-light);
-}
-
-.loader-symbol {
-    width: 74px;
-    height: 74px;
-
+.loader-glyph {
+    position: absolute;
+    inset: 0;
     display: grid;
     place-items: center;
-
-    margin: 0 auto 22px;
-
-    border: 1px solid rgba(240,217,155,.35);
-    border-radius: 50%;
-
-    animation:
-        loaderSpin 2s linear infinite,
-        loaderPulse 2s ease-in-out infinite;
+    font-size: 20px;
+    animation: loaderGlyphPulse 2.2s ease-in-out infinite;
 }
 
-.loader-symbol::before {
-    content: "✦";
-    font-size: 22px;
+@keyframes loaderGlyphPulse {
+    50% { transform: scale(1.18); opacity: .65; }
 }
 
-.loader-text {
-    font-size: 8px;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-}
+.loader-text { font-size: 8px; letter-spacing: 5px; text-transform: uppercase; }
 
-@keyframes loaderSpin {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes loaderPulse {
-    50% {
-        box-shadow: 0 0 50px rgba(200,164,92,.25);
-    }
+.loader-percent {
+    margin-top: 12px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: rgba(240,217,155,.5);
+    font-variant-numeric: tabular-nums;
 }
 
 
 /* =========================================================
    PROGRESS
 ========================================================= */
-
 .progress {
     position: fixed;
     top: 0;
     left: 0;
-
     width: 0%;
     height: 2px;
-
     z-index: 99998;
-
-    background:
-        linear-gradient(
-            90deg,
-            var(--gold),
-            var(--gold-light)
-        );
-
-    box-shadow:
-        0 0 15px rgba(240,217,155,.7);
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    box-shadow: 0 0 15px rgba(240,217,155,.7);
+    transition: width .15s linear;
 }
 
 
 /* =========================================================
    PARTICLES
 ========================================================= */
-
-#particles {
-    position: fixed;
-    inset: 0;
-
-    z-index: 1;
-
-    pointer-events: none;
-    overflow: hidden;
-}
+#particles { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
 
 .particle {
     position: absolute;
-
-    width: 2px;
-    height: 2px;
-
     border-radius: 50%;
-
     background: var(--gold-light);
-
     opacity: 0;
-
-    animation:
-        particleFloat linear infinite;
+    animation: particleFloat linear infinite;
 }
 
+.particle.near { width: 3px; height: 3px; }
+.particle.far  { width: 1.5px; height: 1.5px; filter: blur(.4px); }
+
 @keyframes particleFloat {
-
-    0% {
-        transform:
-            translate3d(0,110vh,0)
-            scale(.3);
-
-        opacity: 0;
-    }
-
-    15% {
-        opacity: .5;
-    }
-
-    80% {
-        opacity: .3;
-    }
-
-    100% {
-        transform:
-            translate3d(40px,-10vh,0)
-            scale(1.4);
-
-        opacity: 0;
-    }
+    0%   { transform: translate3d(0,110vh,0) scale(.3); opacity: 0; }
+    15%  { opacity: .5; }
+    80%  { opacity: .3; }
+    100% { transform: translate3d(var(--sway,40px),-10vh,0) scale(1.4); opacity: 0; }
 }
 
 
 /* =========================================================
    HERO
 ========================================================= */
-
 .hero {
     position: relative;
-
     min-height: 100svh;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
-    padding:
-        max(28px, env(safe-area-inset-top))
-        18px
-        max(70px, env(safe-area-inset-bottom));
-
+    padding: max(28px, env(safe-area-inset-top)) 18px max(70px, env(safe-area-inset-bottom));
     overflow: hidden;
-
     background:
-        radial-gradient(
-            circle at 15% 15%,
-            rgba(200,164,92,.17),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 90% 85%,
-            rgba(20,70,50,.24),
-            transparent 35%
-        ),
+        radial-gradient(circle at 15% 15%, rgba(200,164,92,.17), transparent 28%),
+        radial-gradient(circle at 90% 85%, rgba(20,70,50,.24), transparent 35%),
         var(--cream);
 }
 
-
-/* rotating rings */
-
+/* rotating rings — a JS-driven custom property adds gentle scroll parallax */
 .hero::before,
 .hero::after {
     content: "";
-
     position: absolute;
-
     left: 50%;
     top: 50%;
-
     border-radius: 50%;
-
     border: 1px solid var(--line);
-
     pointer-events: none;
+    transform: translate(-50%, calc(-50% + var(--ring-shift, 0px)));
 }
 
 .hero::before {
     width: min(105vw, 650px);
     height: min(105vw, 650px);
-
-    transform: translate(-50%,-50%);
-
-    animation:
-        ringRotate 22s linear infinite;
+    animation: ringRotate 22s linear infinite;
 }
 
 .hero::after {
     width: min(135vw, 850px);
     height: min(135vw, 850px);
-
-    transform: translate(-50%,-50%);
-
     opacity: .35;
-
-    animation:
-        ringRotateReverse 32s linear infinite;
+    animation: ringRotateReverse 32s linear infinite;
 }
 
-@keyframes ringRotate {
-    to {
-        transform:
-            translate(-50%,-50%)
-            rotate(360deg);
-    }
-}
-
-@keyframes ringRotateReverse {
-    to {
-        transform:
-            translate(-50%,-50%)
-            rotate(-360deg);
-    }
-}
+@keyframes ringRotate        { to { transform: translate(-50%, calc(-50% + var(--ring-shift, 0px))) rotate(360deg); } }
+@keyframes ringRotateReverse { to { transform: translate(-50%, calc(-50% + var(--ring-shift, 0px))) rotate(-360deg); } }
 
 
 /* =========================================================
    HERO CARD
 ========================================================= */
-
 .hero-card {
     position: relative;
     z-index: 5;
-
     width: min(100%, 430px);
-
-    padding:
-        48px
-        25px
-        45px;
-
+    padding: 48px 25px 45px;
     text-align: center;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.93),
-            rgba(249,244,232,.90)
-        );
-
-    border:
-        1px solid rgba(200,164,92,.5);
-
-    box-shadow:
-        0 40px 100px rgba(10,30,22,.20),
-        inset 0 0 0 1px rgba(255,255,255,.5);
-
+    background: linear-gradient(145deg, rgba(255,255,255,.93), rgba(249,244,232,.90));
+    border: 1px solid rgba(200,164,92,.5);
+    box-shadow: 0 40px 100px rgba(10,30,22,.20), inset 0 0 0 1px rgba(255,255,255,.5);
     transform-style: preserve-3d;
-
-    will-change: transform;
-
-    transition:
-        transform .18s cubic-bezier(.2,.8,.2,1);
+    will-change: transform, opacity;
+    transition: transform .18s cubic-bezier(.2,.8,.2,1), opacity .3s ease;
 }
 
-.hero-card::before {
-    content: "";
+.hero-card::before { content: ""; position: absolute; inset: 9px; border: 1px solid rgba(200,164,92,.35); pointer-events: none; }
+.hero-card::after   { content: "✦"; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); color: var(--gold); }
 
-    position: absolute;
-
-    inset: 9px;
-
-    border:
-        1px solid rgba(200,164,92,.35);
-
-    pointer-events: none;
+/* staggered entrance for every direct hero-card element, keyed by --i */
+.stagger-item {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity .8s var(--ease-smooth), transform .8s var(--ease-smooth);
+    transition-delay: calc(var(--i, 0) * 90ms);
 }
 
-.hero-card::after {
-    content: "✦";
-
-    position: absolute;
-
-    top: 15px;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    color: var(--gold);
-}
+.hero-card.entrance .stagger-item { opacity: 1; transform: translateY(0); }
 
 
 /* =========================================================
    HERO TYPOGRAPHY
 ========================================================= */
+.kicker { font-size: 8px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 15px; }
 
-.kicker {
-    font-size: 8px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-
-    color: var(--gold);
-
-    margin-bottom: 15px;
-}
-
-.invite {
-    font-family: var(--serif);
-
-    font-size: 18px;
-
-    font-style: italic;
-
-    color: var(--muted);
-
-    margin-bottom: 5px;
-}
+.invite { font-family: var(--serif); font-size: 18px; font-style: italic; color: var(--muted); margin-bottom: 5px; }
 
 .hero-title {
     font-family: var(--serif);
-
-    font-size:
-        clamp(47px, 14vw, 72px);
-
+    font-size: clamp(47px, 14vw, 72px);
     line-height: .80;
-
     font-weight: 600;
-
     letter-spacing: -2px;
-
     text-transform: uppercase;
-
     color: var(--green);
 }
 
-.hero-title span {
-    display: block;
+.hero-title span { display: block; margin-top: 12px; font-size: .58em; letter-spacing: 6px; font-weight: 500; }
 
-    margin-top: 12px;
+.gold-line { width: 120px; height: 1px; margin: 27px auto; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
 
-    font-size: .58em;
+.new-home { font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 7px; }
 
-    letter-spacing: 6px;
+.house { font-family: var(--serif); font-size: 30px; line-height: 1; font-weight: 600; margin-bottom: 30px; }
 
-    font-weight: 500;
-}
+.with-love { font-size: 8px; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); }
 
-.gold-line {
-    width: 120px;
-    height: 1px;
-
-    margin: 27px auto;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            var(--gold),
-            transparent
-        );
-}
-
-.new-home {
-    font-size: 8px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-
-    color: var(--muted);
-
-    margin-bottom: 7px;
-}
-
-.house {
-    font-family: var(--serif);
-
-    font-size: 30px;
-
-    line-height: 1;
-
-    font-weight: 600;
-
-    margin-bottom: 30px;
-}
-
-.with-love {
-    font-size: 8px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-
-    color: var(--muted);
-}
-
-.names {
-    margin-top: 6px;
-
-    font-family: var(--serif);
-
-    font-size: 27px;
-
-    font-weight: 500;
-}
-
-.names em {
-    color: var(--gold);
-
-    font-size: 18px;
-
-    margin: 0 5px;
-}
+.names { margin-top: 6px; font-family: var(--serif); font-size: 27px; font-weight: 500; }
+.names em { color: var(--gold); font-size: 18px; margin: 0 5px; font-style: normal; }
 
 
 /* =========================================================
    DATE
 ========================================================= */
+.hero-date { display: flex; justify-content: center; align-items: center; gap: 23px; margin-top: 30px; }
 
-.hero-date {
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    gap: 23px;
-
-    margin-top: 30px;
+.date-item small, .time-item small {
+    display: block; font-size: 7px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted);
 }
 
-.date-item small,
-.time-item small {
-    display: block;
+.date-item strong { display: block; font-family: var(--serif); font-size: 28px; }
+.time-item strong { display: block; font-family: var(--serif); font-size: 23px; }
 
-    font-size: 7px;
-
-    letter-spacing: 3px;
-
-    text-transform: uppercase;
-
-    color: var(--muted);
-}
-
-.date-item strong {
-    display: block;
-
-    font-family: var(--serif);
-
-    font-size: 28px;
-}
-
-.time-item strong {
-    display: block;
-
-    font-family: var(--serif);
-
-    font-size: 23px;
-}
-
-.date-divider {
-    width: 1px;
-    height: 42px;
-
-    background: var(--line);
-}
+.date-divider { width: 1px; height: 42px; background: var(--line); }
 
 
 /* =========================================================
    SCROLL HINT
 ========================================================= */
-
 .scroll-hint {
     position: absolute;
-
     bottom: 17px;
-
     left: 50%;
-
     transform: translateX(-50%);
-
     z-index: 10;
-
     text-align: center;
-
     color: var(--muted);
-
     font-size: 7px;
-
     letter-spacing: 3px;
-
     text-transform: uppercase;
-
+    opacity: 0;
+    transition: opacity 1s ease .1s;
     animation: scrollHint 2s ease-in-out infinite;
 }
 
-.scroll-hint::after {
-    content: "↓";
+.scroll-hint.visible { opacity: 1; }
 
-    display: block;
+.scroll-hint::after { content: "↓"; display: block; font-size: 17px; margin-top: 4px; color: var(--gold); }
 
-    font-size: 17px;
-
-    margin-top: 4px;
-
-    color: var(--gold);
-}
-
-@keyframes scrollHint {
-    50% {
-        transform:
-            translateX(-50%)
-            translateY(7px);
-        opacity: .45;
-    }
-}
+@keyframes scrollHint { 50% { transform: translateX(-50%) translateY(7px); } }
 
 
 /* =========================================================
    GENERIC SECTION
 ========================================================= */
+.section { position: relative; padding: 110px 22px; overflow: hidden; }
 
-.section {
-    position: relative;
+.section-inner { position: relative; max-width: 950px; margin: auto; z-index: 4; }
 
-    padding:
-        110px
-        22px;
-
-    overflow: hidden;
-}
-
-.section-inner {
-    position: relative;
-
-    max-width: 950px;
-
-    margin: auto;
-
-    z-index: 4;
-}
-
-.section-label {
-    text-align: center;
-
-    font-size: 8px;
-
-    letter-spacing: 4px;
-
-    text-transform: uppercase;
-
-    color: var(--gold);
-
-    margin-bottom: 15px;
-}
+.section-label { text-align: center; font-size: 8px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 15px; }
 
 .section-title {
     font-family: var(--serif);
-
-    font-size:
-        clamp(42px, 12vw, 70px);
-
+    font-size: clamp(42px, 12vw, 70px);
     line-height: .9;
-
     font-weight: 500;
-
     text-align: center;
-
     margin-bottom: 30px;
 }
 
-.section-copy {
-    max-width: 590px;
+.section-copy { max-width: 590px; margin: auto; text-align: center; color: var(--muted); font-size: 14px; line-height: 1.9; }
 
-    margin: auto;
 
-    text-align: center;
-
-    color: var(--muted);
-
-    font-size: 14px;
-
-    line-height: 1.9;
+/* =========================================================
+   ORNAMENT DIVIDER — quiet rhythm between sections
+========================================================= */
+.ornament-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    max-width: 300px;
+    margin: 55px auto 0;
+    color: var(--gold);
+    opacity: .55;
 }
+
+.ornament-divider::before,
+.ornament-divider::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, currentColor, transparent); }
+
+.ornament-divider span { font-size: 13px; line-height: 1; }
 
 
 /* =========================================================
    BLESSINGS
 ========================================================= */
-
 .blessings {
     min-height: 90svh;
-
     display: grid;
     place-items: center;
-
     background:
-        radial-gradient(
-            circle at 50% 30%,
-            #245b44,
-            transparent 40%
-        ),
-        linear-gradient(
-            145deg,
-            #071711,
-            #103226
-        );
-
+        radial-gradient(circle at 50% 30%, #245b44, transparent 40%),
+        linear-gradient(145deg, #071711, #103226);
     color: white;
+    box-shadow: inset 0 60px 90px -60px rgba(0,0,0,.45), inset 0 -60px 90px -60px rgba(0,0,0,.45);
 }
 
 .blessings::before {
     content: "✦";
-
     position: absolute;
-
     font-size: 320px;
-
     color: var(--gold);
-
     opacity: .025;
-
-    animation:
-        blessingRotate 30s linear infinite;
+    animation: blessingRotate 30s linear infinite;
 }
 
-@keyframes blessingRotate {
-    to {
-        transform: rotate(360deg);
-    }
-}
+@keyframes blessingRotate { to { transform: rotate(360deg); } }
 
-.blessings .section-copy {
-    color: rgba(255,255,255,.66);
-}
+.blessings .section-copy { color: rgba(255,255,255,.66); }
 
 .blessing-orbit {
     width: 190px;
     height: 190px;
-
-    margin:
-        0
-        auto
-        35px;
-
-    border:
-        1px solid rgba(240,217,155,.25);
-
+    margin: 0 auto 35px;
+    border: 1px solid rgba(240,217,155,.25);
     border-radius: 50%;
-
     display: grid;
     place-items: center;
-
     position: relative;
+    transition: transform .25s linear;
 }
 
-.blessing-orbit::before,
-.blessing-orbit::after {
-    content: "";
+.blessing-orbit::before, .blessing-orbit::after { content: ""; position: absolute; border-radius: 50%; border: 1px solid rgba(240,217,155,.20); }
+.blessing-orbit::before { inset: 20px; }
+.blessing-orbit::after  { inset: 40px; }
 
-    position: absolute;
-
-    border-radius: 50%;
-
-    border: 1px solid rgba(240,217,155,.20);
-}
-
-.blessing-orbit::before {
-    inset: 20px;
-}
-
-.blessing-orbit::after {
-    inset: 40px;
-}
-
-.blessing-symbol {
-    color: var(--gold-light);
-
-    font-size: 35px;
-}
+.blessing-symbol { color: var(--gold-light); font-size: 35px; }
 
 
 /* =========================================================
    DETAILS
 ========================================================= */
+.details { background: var(--cream2); }
 
-.details {
-    background: var(--cream2);
-}
-
-.details-grid {
-    display: grid;
-
-    grid-template-columns: 1fr;
-
-    gap: 16px;
-
-    margin-top: 45px;
-}
+.details-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 45px; }
 
 .detail-card {
     position: relative;
-
     padding: 35px 22px;
-
     text-align: center;
-
-    background:
-        linear-gradient(
-            145deg,
-            #fffdf7,
-            #f5eee1
-        );
-
-    border:
-        1px solid var(--line);
-
-    box-shadow:
-        0 15px 40px rgba(16,37,29,.06);
-
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(145deg, #fffdf7, #f5eee1);
+    border: 1px solid var(--line);
+    box-shadow: 0 15px 40px rgba(16,37,29,.06);
     transform-style: preserve-3d;
-
-    transition:
-        transform .5s cubic-bezier(.2,.8,.2,1),
-        box-shadow .5s ease;
 }
 
-.detail-card:hover {
-    transform:
-        translateY(-9px)
-        rotateX(2deg);
-
-    box-shadow:
-        0 25px 60px rgba(16,37,29,.12);
-}
+.detail-card:hover { transform: translateY(-9px) rotateX(2deg); box-shadow: 0 25px 60px rgba(16,37,29,.12); }
 
 .detail-icon {
-    width: 48px;
-    height: 48px;
-
-    margin:
-        0
-        auto
-        16px;
-
-    border:
-        1px solid var(--line);
-
-    border-radius: 50%;
-
-    display: grid;
-    place-items: center;
-
-    color: var(--gold);
-
-    font-size: 20px;
+    width: 48px; height: 48px; margin: 0 auto 16px;
+    border: 1px solid var(--line); border-radius: 50%;
+    display: grid; place-items: center; color: var(--gold); font-size: 20px;
 }
 
-.detail-card small {
-    display: block;
-
-    font-size: 8px;
-
-    letter-spacing: 3px;
-
-    text-transform: uppercase;
-
-    color: var(--muted);
-
-    margin-bottom: 9px;
-}
-
-.detail-card strong {
-    font-family: var(--serif);
-
-    font-size: 25px;
-
-    font-weight: 600;
-}
+.detail-card small { display: block; font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 9px; }
+.detail-card strong { font-family: var(--serif); font-size: 25px; font-weight: 600; }
 
 
 /* =========================================================
    MAP BUTTON
 ========================================================= */
-
 .map-button {
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
-
     gap: 10px;
-
     margin-top: 17px;
-
-    padding:
-        13px
-        23px;
-
+    padding: 13px 23px;
     border-radius: 100px;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--gold-light),
-            var(--gold)
-        );
-
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
     color: #10241c;
-
     text-decoration: none;
-
     font-size: 11px;
-
     font-weight: 600;
-
     letter-spacing: .5px;
-
-    box-shadow:
-        0 10px 30px rgba(200,164,92,.25);
-
-    transition:
-        transform .3s ease,
-        box-shadow .3s ease;
+    box-shadow: 0 10px 30px rgba(200,164,92,.25);
+    transition: transform .3s var(--ease-soft), box-shadow .3s ease;
 }
 
-.map-button:hover {
-    transform:
-        translateY(-3px)
-        scale(1.02);
-
-    box-shadow:
-        0 15px 35px rgba(200,164,92,.35);
-}
-
-.map-button:active {
-    transform: scale(.96);
-}
+.map-button:hover { box-shadow: 0 15px 35px rgba(200,164,92,.35); }
+.map-button:active { transform: scale(.96); }
 
 
 /* =========================================================
    COUNTDOWN
 ========================================================= */
+.countdown-section { background: var(--green); color: white; box-shadow: inset 0 60px 90px -60px rgba(0,0,0,.4), inset 0 -60px 90px -60px rgba(0,0,0,.4); }
 
-.countdown-section {
-    background: var(--green);
+.countdown-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 7px; max-width: 650px; margin: 45px auto 0; }
 
-    color: white;
-}
-
-.countdown-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap: 7px;
-
-    max-width: 650px;
-
-    margin:
-        45px
-        auto
-        0;
-}
-
-.count {
-    padding:
-        20px
-        5px;
-
-    border:
-        1px solid rgba(240,217,155,.16);
-
-    background:
-        rgba(255,255,255,.035);
-
-    backdrop-filter: blur(12px);
-}
+.count { padding: 20px 5px; border: 1px solid rgba(240,217,155,.16); background: rgba(255,255,255,.035); backdrop-filter: blur(12px); }
 
 .count strong {
     display: block;
-
     font-family: var(--serif);
-
-    font-size:
-        clamp(27px,8vw,42px);
-
+    font-size: clamp(27px,8vw,42px);
     font-weight: 500;
-
     color: var(--gold-light);
+    font-variant-numeric: tabular-nums;
 }
 
-.count span {
-    display: block;
-
-    margin-top: 4px;
-
-    font-size: 6px;
-
-    letter-spacing: 2px;
-
-    text-transform: uppercase;
-
-    color: rgba(255,255,255,.48);
+.count strong.tick { animation: countTick .45s var(--ease-soft); }
+@keyframes countTick {
+    0%   { transform: translateY(-8px) scale(1.06); opacity: .35; filter: blur(2px); }
+    100% { transform: translateY(0) scale(1); opacity: 1; filter: blur(0); }
 }
+
+.count span { display: block; margin-top: 4px; font-size: 6px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.48); }
+
+.countdown-complete {
+    margin-top: 40px;
+    text-align: center;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(20px,5.5vw,30px);
+    color: var(--gold-light);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .8s var(--ease-smooth), transform .8s var(--ease-smooth);
+}
+
+.countdown-complete.show { opacity: 1; transform: translateY(0); }
 
 
 /* =========================================================
    FINAL MESSAGE
 ========================================================= */
-
 .final {
     min-height: 85svh;
-
     display: grid;
-
     place-items: center;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(200,164,92,.10),
-            transparent 45%
-        ),
-        var(--cream);
+    background: radial-gradient(circle at center, rgba(200,164,92,.10), transparent 45%), var(--cream);
 }
 
-.quote-mark {
-    font-family: var(--serif);
-
-    font-size: 80px;
-
-    line-height: .4;
-
-    color: var(--gold);
-
-    text-align: center;
-}
+.quote-mark { font-family: var(--serif); font-size: 80px; line-height: .4; color: var(--gold); text-align: center; }
 
 .final-quote {
     max-width: 720px;
-
     margin: 25px auto;
-
     text-align: center;
-
     font-family: var(--serif);
-
     font-style: italic;
-
-    font-size:
-        clamp(36px,10vw,62px);
-
+    font-size: clamp(36px,10vw,62px);
     line-height: 1.05;
 }
 
-.signature {
-    text-align: center;
-
-    font-family: var(--serif);
-
-    font-size: 25px;
-}
+.signature { text-align: center; font-family: var(--serif); font-size: 25px; margin-top: 20px; }
 
 
 /* =========================================================
    FOOTER
 ========================================================= */
+footer { padding: 65px 20px calc(65px + env(safe-area-inset-bottom)); text-align: center; background: #06120d; color: white; }
 
-footer {
-    padding:
-        65px
-        20px
-        calc(65px + env(safe-area-inset-bottom));
+.footer-star { color: var(--gold); font-size: 22px; margin-bottom: 18px; }
 
+footer p { font-family: var(--serif); font-size: 25px; }
+
+footer small { display: block; margin-top: 15px; font-size: 7px; letter-spacing: 3px; opacity: .4; }
+
+
+/* =========================================================
+   ACTION DOCK — Directions / Save the Date / Share
+========================================================= */
+.action-dock {
+    position: fixed;
+    left: 50%;
+    bottom: calc(18px + env(safe-area-inset-bottom));
+    transform: translate(-50%, 140%);
+    z-index: 500;
+    display: flex;
+    gap: 4px;
+    padding: 8px;
+    border-radius: 100px;
+    background: linear-gradient(145deg, rgba(7,23,17,.95), rgba(13,42,32,.95));
+    border: 1px solid rgba(200,164,92,.35);
+    box-shadow: 0 18px 50px rgba(0,0,0,.35);
+    backdrop-filter: blur(18px);
+    opacity: 0;
+    transition: transform .5s var(--ease-smooth), opacity .5s ease;
+}
+
+.action-dock.dock-shown { opacity: 1; transform: translate(-50%, 0); }
+.action-dock.dock-away  { opacity: 0; transform: translate(-50%, 140%); }
+
+.dock-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-width: 72px;
+    padding: 9px 12px;
+    border: none;
+    border-radius: 100px;
+    background: transparent;
+    color: var(--gold-light);
+    font-family: var(--sans);
+    font-size: 8px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform .25s var(--ease-soft), background .25s ease;
+}
+
+.dock-btn svg { width: 17px; height: 17px; display: block; }
+.dock-btn:hover { background: rgba(240,217,155,.09); }
+.dock-btn:active { transform: scale(.92); }
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: calc(88px + env(safe-area-inset-bottom));
+    transform: translate(-50%, 12px);
+    z-index: 600;
+    padding: 11px 22px;
+    border-radius: 100px;
+    background: rgba(7,23,17,.95);
+    color: var(--gold-light);
+    font-size: 11px;
+    letter-spacing: .3px;
     text-align: center;
-
-    background: #06120d;
-
-    color: white;
+    max-width: 86vw;
+    opacity: 0;
+    pointer-events: none;
+    border: 1px solid rgba(200,164,92,.3);
+    transition: opacity .35s ease, transform .35s var(--ease-smooth);
 }
 
-.footer-star {
-    color: var(--gold);
-
-    font-size: 22px;
-
-    margin-bottom: 18px;
-}
-
-footer p {
-    font-family: var(--serif);
-
-    font-size: 25px;
-}
-
-footer small {
-    display: block;
-
-    margin-top: 15px;
-
-    font-size: 7px;
-
-    letter-spacing: 3px;
-
-    opacity: .4;
-}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
 
 
 /* =========================================================
    ADVANCED SCROLL REVEALS
 ========================================================= */
-
-/*
-   Every reveal has a different starting state.
-   JS chooses the direction.
-*/
-
 .reveal {
     opacity: 0;
-
-    will-change:
-        transform,
-        opacity,
-        filter;
-
+    will-change: transform, opacity, filter;
     transition:
-        opacity 1s cubic-bezier(.2,.8,.2,1),
-        transform 1.15s cubic-bezier(.16,1,.3,1),
-        filter 1.15s ease;
+        opacity 1s var(--ease-smooth),
+        transform 1.1s var(--ease-smooth),
+        filter 1.1s ease,
+        box-shadow .5s ease;
 }
 
-
-/* LEFT */
-
-.from-left {
-    transform:
-        translate3d(-120px,0,0)
-        rotateY(-28deg)
-        scale(.82)
-        filter: blur(8px);
-}
-
-
-/* RIGHT */
-
-.from-right {
-    transform:
-        translate3d(120px,0,0)
-        rotateY(28deg)
-        scale(.82)
-        filter: blur(8px);
-}
-
-
-/* BACK */
-
-.from-back {
-    transform:
-        translate3d(0,0,-180px)
-        rotateX(22deg)
-        scale(.55)
-        filter: blur(10px);
-}
-
-
-/* FRONT */
-
-.from-front {
-    transform:
-        translate3d(0,80px,100px)
-        rotateX(-25deg)
-        scale(.75)
-        filter: blur(7px);
-}
-
-
-/* ROTATE */
-
-.from-rotate {
-    transform:
-        translate3d(0,90px,0)
-        rotateZ(-12deg)
-        rotateY(25deg)
-        scale(.75)
-        filter: blur(8px);
-}
-
-
-/* DIAGONAL */
-
-.from-diagonal {
-    transform:
-        translate3d(100px,100px,0)
-        rotateZ(8deg)
-        rotateX(20deg)
-        scale(.75)
-        filter: blur(8px);
-}
-
-
-/* ACTIVE */
+.from-left  { transform: perspective(1000px) translate3d(-64px,16px,0)  rotateX(0deg)  rotateY(0deg)  rotateZ(0deg)  scale(.95); filter: blur(6px); }
+.from-right { transform: perspective(1000px) translate3d(64px,16px,0)   rotateX(0deg)  rotateY(0deg)  rotateZ(0deg)  scale(.95); filter: blur(6px); }
+.from-back  { transform: perspective(1000px) translate3d(0,28px,-70px)  rotateX(10deg) rotateY(0deg)  rotateZ(0deg)  scale(.92); filter: blur(7px); }
+.from-front { transform: perspective(1000px) translate3d(0,40px,60px)   rotateX(-8deg) rotateY(0deg)  rotateZ(0deg)  scale(.95); filter: blur(5px); }
+.from-rotate{ transform: perspective(1000px) translate3d(0,36px,0)      rotateX(0deg)  rotateY(10deg) rotateZ(-5deg) scale(.94); filter: blur(5px); }
+.from-diagonal{transform: perspective(1000px) translate3d(46px,46px,0)  rotateX(0deg)  rotateY(0deg)  rotateZ(4deg)  scale(.94); filter: blur(5px); }
 
 .reveal.active {
     opacity: 1;
-
-    transform:
-        translate3d(0,0,0)
-        rotateX(0)
-        rotateY(0)
-        rotateZ(0)
-        scale(1);
-
-    filter: blur(0);
+    transform: perspective(1000px) translate3d(0,0,0) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+    filter: blur(0px);
 }
 
 
 /* =========================================================
    DESKTOP
 ========================================================= */
-
 @media (min-width: 720px) {
-
-    .hero {
-        padding: 70px;
-    }
-
-    .hero-card {
-        width: 470px;
-        padding: 65px 55px;
-    }
-
-    .details-grid {
-        grid-template-columns:
-            repeat(3,1fr);
-    }
-
-    .section {
-        padding:
-            140px
-            40px;
-    }
+    .hero { padding: 70px; }
+    .hero-card { width: 470px; padding: 65px 55px; }
+    .details-grid { grid-template-columns: repeat(3,1fr); }
+    .section { padding: 140px 40px; }
+    .dock-btn { min-width: 84px; padding: 10px 16px; }
 }
 
 
 /* =========================================================
    SMALL PHONES
 ========================================================= */
-
 @media (max-width: 360px) {
-
-    .hero-card {
-        padding:
-            40px
-            18px;
-    }
-
-    .hero-title {
-        font-size: 43px;
-    }
-
-    .house {
-        font-size: 26px;
-    }
-
-    .names {
-        font-size: 24px;
-    }
-
-    .section {
-        padding:
-            90px
-            17px;
-    }
+    .hero-card { padding: 40px 18px; }
+    .hero-title { font-size: 43px; }
+    .house { font-size: 26px; }
+    .names { font-size: 24px; }
+    .section { padding: 90px 17px; }
+    .action-dock { gap: 2px; padding: 6px; }
+    .dock-btn { min-width: 62px; padding: 8px 8px; }
 }
 
 
 /* =========================================================
    REDUCED MOTION
 ========================================================= */
-
 @media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
+    *, *::before, *::after {
         animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
-
         transition-duration: .01ms !important;
-
         scroll-behavior: auto !important;
     }
 }
@@ -1324,16 +714,20 @@ footer small {
 <!-- ======================================================
      LOADER
 ====================================================== -->
-
-<div id="loader">
+<div id="loader" role="status" aria-live="polite">
 
     <div class="loader-content">
 
-        <div class="loader-symbol"></div>
-
-        <div class="loader-text">
-            Opening Invitation
+        <div class="loader-ring">
+            <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+                <circle class="ring-track" cx="50" cy="50" r="44"></circle>
+                <circle class="ring-fill" id="ringFill" cx="50" cy="50" r="44"></circle>
+            </svg>
+            <span class="loader-glyph" aria-hidden="true">✦</span>
         </div>
+
+        <div class="loader-text">Opening Invitation</div>
+        <div class="loader-percent" id="loaderPercent" aria-hidden="true">0%</div>
 
     </div>
 
@@ -1343,94 +737,64 @@ footer small {
 <!-- ======================================================
      SCROLL PROGRESS
 ====================================================== -->
-
 <div class="progress" id="progress"></div>
 
 
 <!-- ======================================================
      PARTICLES
 ====================================================== -->
-
-<div id="particles"></div>
+<div id="particles" aria-hidden="true"></div>
 
 
 <!-- ======================================================
      HERO
 ====================================================== -->
-
 <section class="hero">
 
     <div class="hero-card" id="heroCard">
 
-        <div class="kicker">
-            A New Beginning
-        </div>
+        <div class="kicker stagger-item" style="--i:0">A New Beginning</div>
 
-        <div class="invite">
-            You are warmly invited to our
-        </div>
+        <div class="invite stagger-item" style="--i:1">You are warmly invited to our</div>
 
-        <h1 class="hero-title">
+        <h1 class="hero-title stagger-item" style="--i:2">
             Housewarming
             <span>Ceremony</span>
         </h1>
 
-        <div class="gold-line"></div>
+        <div class="gold-line stagger-item" style="--i:3"></div>
 
-        <div class="new-home">
-            At Our New Home
+        <div class="stagger-item" style="--i:4">
+            <div class="new-home">At Our New Home</div>
+            <div class="house">Chakkipparamban House</div>
         </div>
 
-        <div class="house">
-            Chakkipparamban House
+        <div class="stagger-item" style="--i:5">
+            <div class="with-love">With Love</div>
+            <div class="names">Akbar Ali <em>&amp;</em> Nabla</div>
         </div>
 
-        <div class="with-love">
-            With Love
-        </div>
-
-        <div class="names">
-            Akbar Ali
-            <em>&</em>
-            Nabla
-        </div>
-
-        <div class="hero-date">
+        <div class="hero-date stagger-item" style="--i:6">
 
             <div class="date-item">
-
                 <small>Date</small>
-
                 <strong>06</strong>
-
-                <small>
-                    September 2026
-                </small>
-
+                <small>September 2026</small>
             </div>
 
             <div class="date-divider"></div>
 
             <div class="time-item">
-
                 <small>Time</small>
-
                 <strong>4 PM</strong>
-
-                <small>
-                    To 8 PM
-                </small>
-
+                <small>To 8 PM</small>
             </div>
 
         </div>
 
     </div>
 
-
-    <div class="scroll-hint">
-        Scroll to discover
-    </div>
+    <div class="scroll-hint">Scroll to discover</div>
 
 </section>
 
@@ -1438,27 +802,17 @@ footer small {
 <!-- ======================================================
      BLESSINGS
 ====================================================== -->
-
 <section class="section blessings">
 
     <div class="section-inner reveal from-back">
 
         <div class="blessing-orbit">
-
-            <div class="blessing-symbol">
-                ✦
-            </div>
-
+            <div class="blessing-symbol">✦</div>
         </div>
 
-        <div class="section-label">
-            With The Blessings Of
-        </div>
+        <div class="section-label">With The Blessings Of</div>
 
-        <h2 class="section-title">
-            Family,<br>
-            Love & Grace
-        </h2>
+        <h2 class="section-title">Family,<br>Love &amp; Grace</h2>
 
         <p class="section-copy">
             We are delighted to open the doors of our
@@ -1466,6 +820,8 @@ footer small {
             surrounded by the people who mean the most
             to us.
         </p>
+
+        <div class="ornament-divider" aria-hidden="true"><span>✦</span></div>
 
     </div>
 
@@ -1475,91 +831,47 @@ footer small {
 <!-- ======================================================
      DETAILS
 ====================================================== -->
-
 <section class="section details">
 
     <div class="section-inner">
 
-        <div class="section-label reveal from-left">
-            Join Us
-        </div>
+        <div class="section-label reveal from-left">Join Us</div>
 
-        <h2 class="section-title reveal from-back">
-            The Details
-        </h2>
-
+        <h2 class="section-title reveal from-back">The Details</h2>
 
         <div class="details-grid">
 
             <!-- DATE -->
-
             <div class="detail-card reveal from-left">
-
-                <div class="detail-icon">
-                    ◷
-                </div>
-
-                <small>
-                    Date
-                </small>
-
-                <strong>
-                    06 September<br>
-                    2026
-                </strong>
-
+                <div class="detail-icon">◷</div>
+                <small>Date</small>
+                <strong>06 September<br>2026</strong>
             </div>
-
 
             <!-- TIME -->
-
             <div class="detail-card reveal from-right">
-
-                <div class="detail-icon">
-                    ◌
-                </div>
-
-                <small>
-                    Time
-                </small>
-
-                <strong>
-                    4 PM — 8 PM
-                </strong>
-
+                <div class="detail-icon">◌</div>
+                <small>Time</small>
+                <strong>4 PM — 8 PM</strong>
             </div>
 
-
             <!-- VENUE -->
-
             <div class="detail-card reveal from-diagonal">
+                <div class="detail-icon">⌖</div>
+                <small>Venue</small>
+                <strong>Pandikkad,<br>Velluvangad</strong>
 
-                <div class="detail-icon">
-                    ⌖
-                </div>
-
-                <small>
-                    Venue
-                </small>
-
-                <strong>
-                    Pandikkad,<br>
-                    Velluvangad
-                </strong>
-
-                <a
-                    class="map-button"
-                    href="https://maps.app.goo.gl/SJsyKaQeRbm8jcac9?g_st=ac"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Open in Maps
-                    <span>↗</span>
+                <a class="map-button"
+                   href="https://maps.app.goo.gl/SJsyKaQeRbm8jcac9?g_st=ac"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    Open in Maps <span aria-hidden="true">↗</span>
                 </a>
-
             </div>
 
         </div>
+
+        <div class="ornament-divider" aria-hidden="true"><span>✦</span></div>
 
     </div>
 
@@ -1569,42 +881,26 @@ footer small {
 <!-- ======================================================
      COUNTDOWN
 ====================================================== -->
-
 <section class="section countdown-section">
 
     <div class="section-inner">
 
-        <div class="section-label reveal from-left">
-            Until We Celebrate
-        </div>
+        <div class="section-label reveal from-left">Until We Celebrate</div>
 
-        <h2 class="section-title reveal from-back">
-            The Moment Awaits
-        </h2>
+        <h2 class="section-title reveal from-back">The Moment Awaits</h2>
 
         <div class="countdown-grid reveal from-front">
-
-            <div class="count">
-                <strong id="days">00</strong>
-                <span>Days</span>
-            </div>
-
-            <div class="count">
-                <strong id="hours">00</strong>
-                <span>Hours</span>
-            </div>
-
-            <div class="count">
-                <strong id="minutes">00</strong>
-                <span>Minutes</span>
-            </div>
-
-            <div class="count">
-                <strong id="seconds">00</strong>
-                <span>Seconds</span>
-            </div>
-
+            <div class="count"><strong id="days">00</strong><span>Days</span></div>
+            <div class="count"><strong id="hours">00</strong><span>Hours</span></div>
+            <div class="count"><strong id="minutes">00</strong><span>Minutes</span></div>
+            <div class="count"><strong id="seconds">00</strong><span>Seconds</span></div>
         </div>
+
+        <p class="countdown-complete" id="countdownComplete">
+            The celebration has begun — welcome home!
+        </p>
+
+        <div class="ornament-divider" aria-hidden="true"><span>✦</span></div>
 
     </div>
 
@@ -1614,14 +910,11 @@ footer small {
 <!-- ======================================================
      FINAL MESSAGE
 ====================================================== -->
-
 <section class="section final">
 
     <div class="section-inner reveal from-rotate">
 
-        <div class="quote-mark">
-            “
-        </div>
+        <div class="quote-mark">“</div>
 
         <div class="final-quote">
             Your presence will make
@@ -1629,20 +922,12 @@ footer small {
         </div>
 
         <p class="section-copy">
-
             Please grace us with your presence
             as we celebrate this beautiful milestone
             and the beginning of a new chapter.
-
         </p>
 
-        <div class="signature">
-
-            With love,<br>
-
-            Akbar Ali & Nabla
-
-        </div>
+        <div class="signature">With love,<br>Akbar Ali &amp; Nabla</div>
 
     </div>
 
@@ -1652,404 +937,458 @@ footer small {
 <!-- ======================================================
      FOOTER
 ====================================================== -->
-
 <footer>
-
-    <div class="footer-star">
-        ✦
-    </div>
-
-    <p>
-        We can't wait to welcome you home.
-    </p>
-
-    <small>
-        CHAKKIPPARAMBAN HOUSE • 2026
-    </small>
-
+    <div class="footer-star" aria-hidden="true">✦</div>
+    <p>We can't wait to welcome you home.</p>
+    <small>CHAKKIPPARAMBAN HOUSE • 2026</small>
 </footer>
 
 
+<!-- ======================================================
+     ACTION DOCK
+====================================================== -->
+<div class="action-dock" id="actionDock">
+
+    <button type="button" class="dock-btn" id="btnDirections" aria-label="Get directions to the venue">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true" focusable="false">
+            <path d="M12 21s-7-7.2-7-12a7 7 0 1 1 14 0c0 4.8-7 12-7 12Z"/>
+            <circle cx="12" cy="9" r="2.4"/>
+        </svg>
+        <span>Directions</span>
+    </button>
+
+    <button type="button" class="dock-btn" id="btnCalendar" aria-label="Add event to calendar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true" focusable="false">
+            <rect x="3.5" y="5.5" width="17" height="15" rx="2"/>
+            <path d="M3.5 10h17M8 3v4M16 3v4"/>
+        </svg>
+        <span>Save Date</span>
+    </button>
+
+    <button type="button" class="dock-btn" id="btnShare" aria-label="Share this invitation">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true" focusable="false">
+            <circle cx="6" cy="12" r="2.2"/>
+            <circle cx="18" cy="6" r="2.2"/>
+            <circle cx="18" cy="18" r="2.2"/>
+            <path d="M8 10.8 16 7M8 13.2l8 3.8"/>
+        </svg>
+        <span>Share</span>
+    </button>
+
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+
 <script>
+"use strict";
 
 /* =========================================================
    LOADER
+   Self-contained: runs immediately, doesn't depend on
+   variables declared further down the file.
 ========================================================= */
+(function initLoader() {
 
-window.addEventListener("load", () => {
+    var loader = document.getElementById("loader");
+    var ringFill = document.getElementById("ringFill");
+    var percentLabel = document.getElementById("loaderPercent");
 
-    setTimeout(() => {
+    var circumference = 276.5;
+    var duration = 1300;
+    var startTime = null;
+    var pageLoaded = false;
+    var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-        document
-            .getElementById("loader")
-            .classList.add("hide");
+    window.addEventListener("load", function () { pageLoaded = true; });
 
-    }, 900);
+    if (reduceMotion) {
+        if (ringFill) ringFill.style.strokeDashoffset = "0";
+        if (percentLabel) percentLabel.textContent = "100%";
+        waitAndHide();
+        return;
+    }
 
-});
+    function tick(now) {
+        if (startTime === null) startTime = now;
+
+        var elapsed = now - startTime;
+        var progress = Math.min(1, elapsed / duration);
+        var eased = 1 - Math.pow(1 - progress, 3);
+
+        if (ringFill) ringFill.style.strokeDashoffset = String(circumference * (1 - eased));
+        if (percentLabel) percentLabel.textContent = Math.round(eased * 100) + "%";
+
+        if (progress < 1) {
+            requestAnimationFrame(tick);
+        } else {
+            waitAndHide();
+        }
+    }
+
+    function waitAndHide() {
+        if (pageLoaded || document.readyState === "complete") {
+            setTimeout(hideLoader, 200);
+        } else {
+            setTimeout(waitAndHide, 80);
+        }
+    }
+
+    function hideLoader() {
+        loader.classList.add("hide");
+
+        var card = document.getElementById("heroCard");
+        var hint = document.querySelector(".scroll-hint");
+
+        if (card) card.classList.add("entrance");
+        if (hint) hint.classList.add("visible");
+    }
+
+    requestAnimationFrame(tick);
+
+})();
 
 
 /* =========================================================
-   PARTICLES
+   DOM REFERENCES
 ========================================================= */
+var hero = document.querySelector(".hero");
+var heroCard = document.getElementById("heroCard");
+var progressBar = document.getElementById("progress");
+var particleBox = document.getElementById("particles");
+var toast = document.getElementById("toast");
+var actionDock = document.getElementById("actionDock");
 
-const particleBox =
-    document.getElementById("particles");
+var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-for (let i = 0; i < 38; i++) {
 
-    const particle =
-        document.createElement("div");
+/* =========================================================
+   PARTICLES — two depths for a subtle sense of parallax
+========================================================= */
+var particleCount = prefersReducedMotion ? 0 : 34;
 
-    particle.className = "particle";
+for (var i = 0; i < particleCount; i++) {
+    var particle = document.createElement("div");
+    var isNear = i % 3 === 0;
 
-    particle.style.left =
-        Math.random() * 100 + "%";
-
-    particle.style.animationDuration =
-        (9 + Math.random() * 14) + "s";
-
-    particle.style.animationDelay =
-        (-Math.random() * 20) + "s";
-
-    particle.style.opacity =
-        Math.random() * .5;
+    particle.className = "particle " + (isNear ? "near" : "far");
+    particle.style.left = Math.random() * 100 + "%";
+    particle.style.setProperty("--sway", (Math.random() * 80 - 40) + "px");
+    particle.style.animationDuration = (isNear ? 8 + Math.random() * 6 : 16 + Math.random() * 12) + "s";
+    particle.style.animationDelay = (-Math.random() * 20) + "s";
 
     particleBox.appendChild(particle);
 }
 
 
 /* =========================================================
-   HERO 3D POINTER
+   HERO INTERACTION
+   One function composes pointer/touch tilt AND the
+   scroll-linked fade so the two never fight each other.
 ========================================================= */
+var tiltX = 0;
+var tiltY = 0;
 
-const hero =
-    document.querySelector(".hero");
+function applyHeroTransform() {
+    if (!heroCard) return;
 
-const heroCard =
-    document.getElementById("heroCard");
+    var heroHeight = hero.offsetHeight || window.innerHeight;
+    var progress = Math.min(1, Math.max(0, window.scrollY / (heroHeight * 0.85)));
+    var eased = progress * progress;
+    var fade = 1 - eased;
 
-let pointerActive = false;
+    heroCard.style.opacity = String(fade);
 
-hero.addEventListener("pointermove", e => {
+    if (prefersReducedMotion) return;
 
-    if (window.innerWidth < 700) return;
+    var scale = 1 - eased * 0.08;
+    var shiftY = eased * -40;
 
-    const rect =
-        hero.getBoundingClientRect();
-
-    const x =
-        (e.clientX - rect.left) /
-        rect.width - .5;
-
-    const y =
-        (e.clientY - rect.top) /
-        rect.height - .5;
-
-    heroCard.style.transform = `
-        perspective(1300px)
-        rotateX(${y * -7}deg)
-        rotateY(${x * 8}deg)
-        translateZ(20px)
-    `;
-
-    pointerActive = true;
-});
-
-
-hero.addEventListener("pointerleave", () => {
-
-    if (!pointerActive) return;
-
-    heroCard.style.transform = `
-        perspective(1300px)
-        rotateX(0deg)
-        rotateY(0deg)
-        translateZ(0)
-    `;
-
-});
-
-
-/* =========================================================
-   MOBILE TILT
-========================================================= */
-
-let touchStartX = 0;
-let touchStartY = 0;
-
-hero.addEventListener("touchstart", e => {
-
-    touchStartX =
-        e.touches[0].clientX;
-
-    touchStartY =
-        e.touches[0].clientY;
-
-}, { passive: true });
-
-
-hero.addEventListener("touchmove", e => {
-
-    if (window.innerWidth > 699)
-        return;
-
-    const dx =
-        e.touches[0].clientX -
-        touchStartX;
-
-    const dy =
-        e.touches[0].clientY -
-        touchStartY;
-
-    heroCard.style.transform = `
-        perspective(900px)
-        rotateY(${dx * .035}deg)
-        rotateX(${dy * -.025}deg)
-    `;
-
-}, { passive: true });
-
-
-hero.addEventListener("touchend", () => {
-
-    heroCard.style.transform = `
-        perspective(900px)
-        rotateX(0)
-        rotateY(0)
-        translateZ(0)
-    `;
-
-});
-
-
-/* =========================================================
-   ADVANCED REVEAL OBSERVER
-========================================================= */
-
-const revealItems =
-    document.querySelectorAll(".reveal");
-
-const revealObserver =
-    new IntersectionObserver(
-
-        entries => {
-
-            entries.forEach(entry => {
-
-                if (!entry.isIntersecting)
-                    return;
-
-                const element =
-                    entry.target;
-
-                element.classList.add("active");
-
-                revealObserver.unobserve(element);
-
-            });
-
-        },
-
-        {
-            threshold: .12,
-            rootMargin: "0px 0px -50px 0px"
-        }
-
-    );
-
-
-revealItems.forEach(element => {
-
-    revealObserver.observe(element);
-
-});
-
-
-/* =========================================================
-   STAGGER DETAIL CARDS
-========================================================= */
-
-document
-    .querySelectorAll(".details-grid .reveal")
-    .forEach((card, index) => {
-
-        card.style.transitionDelay =
-            `${index * 130}ms`;
-
-    });
-
-
-/* =========================================================
-   SCROLL PROGRESS
-========================================================= */
-
-const progress =
-    document.getElementById("progress");
-
-function updateProgress() {
-
-    const scrollTop =
-        window.scrollY;
-
-    const documentHeight =
-        document.documentElement.scrollHeight -
-        window.innerHeight;
-
-    const percentage =
-        documentHeight > 0
-        ? (scrollTop / documentHeight) * 100
-        : 0;
-
-    progress.style.width =
-        percentage + "%";
-
+    heroCard.style.transform =
+        "perspective(1300px) rotateX(" + tiltX + "deg) rotateY(" + tiltY + "deg) " +
+        "translate3d(0, " + shiftY + "px, 0) scale(" + scale + ")";
 }
 
-window.addEventListener(
-    "scroll",
-    updateProgress,
-    { passive: true }
-);
+if (!prefersReducedMotion) {
 
-updateProgress();
+    hero.addEventListener("pointermove", function (e) {
+        if (window.innerWidth < 700) return;
+
+        var rect = hero.getBoundingClientRect();
+        var x = (e.clientX - rect.left) / rect.width - 0.5;
+        var y = (e.clientY - rect.top) / rect.height - 0.5;
+
+        tiltX = y * -7;
+        tiltY = x * 8;
+        applyHeroTransform();
+    });
+
+    hero.addEventListener("pointerleave", function () {
+        tiltX = 0;
+        tiltY = 0;
+        applyHeroTransform();
+    });
+
+    var touchStartX = 0;
+    var touchStartY = 0;
+
+    hero.addEventListener("touchstart", function (e) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    hero.addEventListener("touchmove", function (e) {
+        if (window.innerWidth > 699) return;
+
+        var dx = e.touches[0].clientX - touchStartX;
+        var dy = e.touches[0].clientY - touchStartY;
+
+        tiltY = dx * 0.035;
+        tiltX = dy * -0.025;
+        applyHeroTransform();
+    }, { passive: true });
+
+    hero.addEventListener("touchend", function () {
+        tiltX = 0;
+        tiltY = 0;
+        applyHeroTransform();
+    });
+}
+
+applyHeroTransform();
 
 
 /* =========================================================
-   PARALLAX BACKGROUND
+   SCROLL REVEAL OBSERVER
 ========================================================= */
+var revealItems = document.querySelectorAll(".reveal");
 
-let parallaxTick = false;
+var revealObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("active");
+        revealObserver.unobserve(entry.target);
+    });
+}, { threshold: 0.12, rootMargin: "0px 0px -50px 0px" });
 
-window.addEventListener(
-    "scroll",
-    () => {
+revealItems.forEach(function (el) { revealObserver.observe(el); });
 
-        if (parallaxTick)
-            return;
+document.querySelectorAll(".details-grid .reveal").forEach(function (card, index) {
+    card.style.transitionDelay = (index * 130) + "ms";
+});
 
-        parallaxTick = true;
 
-        requestAnimationFrame(() => {
+/* =========================================================
+   MASTER SCROLL HANDLER
+   Everything that needs to react to scroll lives in one
+   rAF-throttled function so we only ever pay for one
+   layout read/write cycle per frame.
+========================================================= */
+var scrollTicking = false;
+var lastScrollY = window.scrollY;
 
-            const scroll =
-                window.scrollY;
+function onScroll() {
+    var scrollY = window.scrollY;
 
-            document
-                .querySelectorAll(".blessing-orbit")
-                .forEach(el => {
+    var documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var percentage = documentHeight > 0 ? (scrollY / documentHeight) * 100 : 0;
+    progressBar.style.width = percentage + "%";
 
-                    const movement =
-                        scroll * .025;
+    applyHeroTransform();
 
-                    el.style.transform =
-                        `rotate(${movement}deg)`;
+    if (!prefersReducedMotion) {
+        hero.style.setProperty("--ring-shift", (scrollY * 0.12) + "px");
 
-                });
-
-            parallaxTick = false;
-
+        document.querySelectorAll(".blessing-orbit").forEach(function (el) {
+            el.style.transform = "rotate(" + (scrollY * 0.025) + "deg)";
         });
+    }
 
-    },
+    var heroBottom = hero.offsetHeight * 0.5;
 
-    { passive: true }
-);
+    if (scrollY < heroBottom) {
+        actionDock.classList.remove("dock-shown", "dock-away");
+    } else if (scrollY < lastScrollY) {
+        actionDock.classList.add("dock-shown");
+        actionDock.classList.remove("dock-away");
+    } else if (scrollY > lastScrollY) {
+        actionDock.classList.add("dock-away");
+        actionDock.classList.remove("dock-shown");
+    }
+
+    lastScrollY = scrollY;
+    scrollTicking = false;
+}
+
+window.addEventListener("scroll", function () {
+    if (!scrollTicking) {
+        requestAnimationFrame(onScroll);
+        scrollTicking = true;
+    }
+}, { passive: true });
+
+onScroll();
 
 
 /* =========================================================
    COUNTDOWN
 ========================================================= */
+var eventStart = new Date("2026-09-06T16:00:00+05:30");
+var eventEnd = new Date(eventStart.getTime() + 4 * 60 * 60 * 1000);
 
-const eventDate =
-    new Date(
-        "2026-09-06T16:00:00+05:30"
-    );
+var daysEl = document.getElementById("days");
+var hoursEl = document.getElementById("hours");
+var minutesEl = document.getElementById("minutes");
+var secondsEl = document.getElementById("seconds");
+var countdownComplete = document.getElementById("countdownComplete");
+
+var hasCelebrated = false;
+
+function setCount(el, value) {
+    var text = String(value).padStart(2, "0");
+    if (el.textContent === text) return;
+
+    el.textContent = text;
+
+    if (!prefersReducedMotion) {
+        el.classList.remove("tick");
+        void el.offsetWidth; /* restart the animation */
+        el.classList.add("tick");
+    }
+}
 
 function updateCountdown() {
+    var now = new Date();
+    var diff = eventStart - now;
+    if (diff < 0) diff = 0;
 
-    const now =
-        new Date();
+    setCount(daysEl, Math.floor(diff / 86400000));
+    setCount(hoursEl, Math.floor((diff / 3600000) % 24));
+    setCount(minutesEl, Math.floor((diff / 60000) % 60));
+    setCount(secondsEl, Math.floor((diff / 1000) % 60));
 
-    let difference =
-        eventDate - now;
-
-    if (difference < 0)
-        difference = 0;
-
-    const days =
-        Math.floor(
-            difference /
-            (1000 * 60 * 60 * 24)
-        );
-
-    const hours =
-        Math.floor(
-            (difference /
-            (1000 * 60 * 60)) % 24
-        );
-
-    const minutes =
-        Math.floor(
-            (difference /
-            (1000 * 60)) % 60
-        );
-
-    const seconds =
-        Math.floor(
-            (difference / 1000) % 60
-        );
-
-    document.getElementById("days")
-        .textContent =
-        String(days).padStart(2,"0");
-
-    document.getElementById("hours")
-        .textContent =
-        String(hours).padStart(2,"0");
-
-    document.getElementById("minutes")
-        .textContent =
-        String(minutes).padStart(2,"0");
-
-    document.getElementById("seconds")
-        .textContent =
-        String(seconds).padStart(2,"0");
-
+    if (diff <= 0 && !hasCelebrated) {
+        hasCelebrated = true;
+        countdownComplete.classList.add("show");
+    }
 }
 
 updateCountdown();
-
-setInterval(
-    updateCountdown,
-    1000
-);
+setInterval(updateCountdown, 1000);
 
 
 /* =========================================================
-   PREVENT DOUBLE TAP ZOOM
+   TOAST
 ========================================================= */
+var toastTimer = null;
 
-let lastTouchEnd = 0;
+function showToast(message) {
+    toast.textContent = message;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toast.classList.remove("show"); }, 2600);
+}
 
-document.addEventListener(
-    "touchend",
-    event => {
 
-        const now =
-            Date.now();
+/* =========================================================
+   ACTION DOCK — Directions / Save the Date / Share
+========================================================= */
+var mapsUrl = "https://maps.app.goo.gl/SJsyKaQeRbm8jcac9?g_st=ac";
 
-        if (now - lastTouchEnd <= 300) {
+document.getElementById("btnDirections").addEventListener("click", function () {
+    window.open(mapsUrl, "_blank", "noopener");
+});
 
-            event.preventDefault();
+document.getElementById("btnCalendar").addEventListener("click", function () {
 
-        }
+    function toICSDate(date) {
+        return date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+    }
 
-        lastTouchEnd = now;
+    var ics = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//Chakkipparamban House//Housewarming Invite//EN",
+        "BEGIN:VEVENT",
+        "UID:housewarming-" + Date.now() + "@chakkipparamban",
+        "DTSTAMP:" + toICSDate(new Date()),
+        "DTSTART:" + toICSDate(eventStart),
+        "DTEND:" + toICSDate(eventEnd),
+        "SUMMARY:Housewarming Ceremony - Akbar Ali & Nabla",
+        "DESCRIPTION:You are warmly invited to the housewarming ceremony at Chakkipparamban House.",
+        "LOCATION:Chakkipparamban House\\, Pandikkad\\, Velluvangad",
+        "END:VEVENT",
+        "END:VCALENDAR"
+    ].join("\r\n");
 
-    },
-    false
-);
+    var blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    var link = document.createElement("a");
+
+    link.href = url;
+    link.download = "housewarming-akbar-nabla.ics";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+
+    showToast("Event saved — check your calendar app");
+});
+
+document.getElementById("btnShare").addEventListener("click", function () {
+
+    var shareData = {
+        title: "Housewarming Ceremony - Akbar Ali & Nabla",
+        text: "You're invited to our housewarming ceremony on 06 September 2026, 4 to 8 PM.",
+        url: window.location.href
+    };
+
+    if (navigator.share) {
+        navigator.share(shareData).catch(function () { /* user cancelled, nothing to do */ });
+    } else if (navigator.clipboard) {
+        navigator.clipboard.writeText(shareData.url)
+            .then(function () { showToast("Invitation link copied"); })
+            .catch(function () { showToast("Unable to copy link"); });
+    }
+});
+
+
+/* =========================================================
+   MAGNETIC HOVER — desktop only, subtle pull toward cursor
+========================================================= */
+function addMagnetic(el, strength) {
+    el.addEventListener("pointermove", function (e) {
+        if (window.innerWidth < 700) return;
+
+        var rect = el.getBoundingClientRect();
+        var relX = (e.clientX - rect.left) / rect.width - 0.5;
+        var relY = (e.clientY - rect.top) / rect.height - 0.5;
+
+        el.style.transform = "translate(" + (relX * strength) + "px, " + (relY * strength) + "px)";
+    });
+
+    el.addEventListener("pointerleave", function () {
+        el.style.transform = "translate(0, 0)";
+    });
+}
+
+if (!prefersReducedMotion) {
+    document.querySelectorAll(".dock-btn").forEach(function (el) { addMagnetic(el, 10); });
+    document.querySelectorAll(".map-button").forEach(function (el) { addMagnetic(el, 8); });
+}
+
+
+/* =========================================================
+   PREVENT DOUBLE-TAP ZOOM
+========================================================= */
+var lastTouchEnd = 0;
+
+document.addEventListener("touchend", function (event) {
+    var now = Date.now();
+    if (now - lastTouchEnd <= 300) event.preventDefault();
+    lastTouchEnd = now;
+}, false);
 
 </script>
 
